@@ -10,20 +10,28 @@
     <title>Todo List</title>
   </head>
   <body>
+    <div id="modal">
+      <img src="../src/assets/close.svg" alt="" class="closeButton" />
+      <div id="modalContainer"></div>
+    </div>
     <div class="container">
       <div class="sidebar">
         <h1>Priorities</h1>
-        <div class="priority">
-          <div class="priorityColorContainer">
-            <div class="priorityColor"></div>
-          </div>
-          <p class="priorityName">Urgent</p>
-        </div>
+        <div id="priorities"> </div>
+        <button id="addBigTodo">Add new todo</button>
+        <button>Clear completed</button>
+        <h1>Projects</h1>
+        <div id="projects"></div>
       </div>
       <div class="separator"></div>
       <div class="mainContent">
         <div class="pending">
-          <h1>Project List</h1>
+          <h1>Pending Tasks</h1>
+          <div class="pendingTodos">
+            <div class="taskContainer">
+              <div class="subtasksContainer"> </div>
+            </div>
+          </div>
         </div>
         <div class="separator"></div>
         <div class="completed">
