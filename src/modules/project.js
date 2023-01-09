@@ -12,11 +12,11 @@ class Project {
   }
 
   get pending() {
-    return this.#pendingTasks;
+    return [...this.#pendingTasks];
   }
 
   get completed() {
-    return this.#completedTasks;
+    return [...this.#completedTasks];
   }
 
   addPending(item) {

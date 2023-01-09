@@ -1,0 +1,34 @@
+#modal {
+  width: max-content;
+  height: max-content;
+  background-color: #343a40;
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid gray;
+  border-radius: 12px;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#modalContainer {
+  position: relative;
+  height: 100%;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1vw;
+  right: 1vw;
+  height: 1.3vw;
+  width: 1.3vw;
+}
+
+hr {
+  background-color: gray;
+  height: 1px;
+  border: none;
+}

@@ -1,17 +1,17 @@
 .container {
   background-color: #343a40;
   height: 90%;
-  width: 65%;
+  min-width: 75%;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: grid;
-  grid-template-columns: 1.2fr 2px 3fr;
+  grid-template-columns: minmax(200px, 1.2fr) 2px 3fr;
   box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   border-top: #464e55 4px solid;
-  border-left: #464e55 4px solid;
+  border-left: #464e55 2px solid;
 }
 
 .separator {
@@ -31,4 +31,28 @@
 .completed {
   border-top: #464e55 2px solid;
   border-left: #464e55 2px solid;
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    border: none;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .pending {
+    border-left: none;
+  }
+}
+
+.sidebar {
+  border-right: #15181c 2px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

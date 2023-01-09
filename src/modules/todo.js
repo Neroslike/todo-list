@@ -22,7 +22,6 @@ class Todo {
     this.#id = idAssigner.getIdNumber();
     this.#parent = parent;
     if (this.#parent === null) this.#children = [];
-    // if (this.#parent === null) Project.addPending(this);
   }
 
   createTodo(title, date, priority, description) {
@@ -32,7 +31,7 @@ class Todo {
   }
 
   get children() {
-    return this.#children;
+    return [...this.#children];
   }
 
   get parent() {

@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background-color: rgba(31, 31, 31, 0.946);
+  background: linear-gradient(119.75deg, #6e9ecf 13.02%, #12263a 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,8 +15,20 @@ body {
 
 h1 {
   text-align: center;
-  font-size: calc(1rem + 1vw);
+  // font-size: calc(1rem + 1vw);
+  font-size: 1.5vw;
   padding: 0;
-  margin: 16px 0;
+  margin: 0.7vw 0;
   user-select: none;
+}
+
+.projectTitle {
+  font-size: 1vw;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
 }
