@@ -1,5 +1,6 @@
 import helper from "./helper";
 import idAssigner from "./idAssigner";
+import Project from "./project";
 
 /* 1.- Be able to create and delete todo's ✔️
    2.- If a todo's is a parent, they get added to the pending tasks when created ✔️
@@ -21,7 +22,12 @@ class Todo {
     this.#isChecked = isChecked;
     this.#id = idAssigner.getIdNumber();
     this.#parent = parent;
-    if (this.#parent === null) this.#children = [];
+    if (this.#parent === null) {
+      this.#children = [];
+      Project.selected.addPending(this);
+    } else {
+      this.#children = false;
+    }
   }
 
   createTodo(title, date, priority, description) {
@@ -30,8 +36,13 @@ class Todo {
     return a;
   }
 
+  get id() {
+    return this.#id;
+  }
+
   get children() {
-    return [...this.#children];
+    if (this.#children) return [...this.#children];
+    return this.#children;
   }
 
   get parent() {
@@ -50,6 +61,10 @@ class Todo {
 
   get check() {
     return this.#isChecked;
+  }
+
+  isSubtask() {
+    return this.#parent !== null;
   }
 
   #recursiveCheck(array, index = 0) {

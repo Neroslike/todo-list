@@ -5,6 +5,8 @@ class Project {
   #pendingTasks;
   #completedTasks;
 
+  static selected;
+
   constructor(name) {
     this.name = name;
     this.#pendingTasks = [];

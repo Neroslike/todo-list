@@ -9,8 +9,21 @@ import DOMTodo from "./modules/components/todo";
 import DOMProject from "./modules/components/project";
 import DOMNew from "./modules/components/new";
 import DOMView from "./modules/components/view";
+import DOMModal from "./modules/components/modal";
+import addNewTodo from "./modules/components/addNewTodo";
+
+/*
+1.- Add styles to buttons ✔️
+2.- Add functionality to buttons
+3.- Add close function to modal, set opacity to background
+4.- Create an edit modal
+5.- Add basic buttons to view modal
+*/
+
+// refactor almost everything or kys
 
 let project = new Project("A project");
+Project.selected = project;
 
 let a = new Todo(
   "My first todo",
@@ -37,20 +50,14 @@ let c = a.createTodo(
 );
 
 let d = b.createTodo(
-  "Third todo for that project",
+  "Third todo for that project, im now typing to fill the title",
   "10/01/2023",
   5,
-  "Do not delete me",
+  "This course takes you on a journey through the many facets of modern responsive web design. The first few modules will ease you in with a history of where responsive design came from and a look at the fundamentals of responsive layouts. From there,",
   true
 );
 
-project.addPending(a);
-project.addPending(b);
-
 DOMProject.populateProject(project);
 DOMProject.displayProject(project);
-DOMView.renderInfo(a);
-// DOMNew.createNewTodoModal();
-// a.toggleCheck();
 
-// console.log(project.pending);
+let tasks = document.querySelectorAll(".taskDataContainer");

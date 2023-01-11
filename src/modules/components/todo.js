@@ -1,6 +1,9 @@
 import DOMHandler from "../DOMHandler";
 import Todo from "../todo";
 import DOMPriority from "./priority";
+import DOMView from "./view";
+import DOMNew from "./new";
+import DOMModal from "./modal";
 
 // Refactor this code, one function shouldn't do all the job, think gears
 
@@ -30,14 +33,14 @@ const DOMTodo = (() => {
     return miniContainers;
   };
 
-  const _createTodoTitle = (todo) => {
+  const createTodoTitle = (todo) => {
     let taskTitle = DOMHandler.createElement("div", "taskTitle");
     let taskTitleP = DOMHandler.createElement("p", "", todo.title);
     taskTitle.append(taskTitleP);
     return taskTitle;
   };
 
-  const _createTodoTime = (todo) => {
+  const createTodoTime = (todo) => {
     let taskTime = DOMHandler.createElement("div", "taskTime");
     let taskTimeP = DOMHandler.createElement("p", "", "5 days left");
     taskTime.append(taskTimeP);
@@ -56,24 +59,43 @@ const DOMTodo = (() => {
       deleteIcon,
     ];
     let elements = _createMiniContainers(icons);
-    let taskTitle = _createTodoTitle(todo);
-    let taskTime = _createTodoTime(todo);
+    let taskTitle = createTodoTitle(todo);
+    let taskTime = createTodoTime(todo);
+    let dataContainer = DOMHandler.createElement("div", "taskDataContainer");
+    dataContainer.append(taskTitle);
+    dataContainer.append(taskTime);
 
-    elements.splice(2, 0, taskTitle, taskTime);
+    elements.splice(2, 0, dataContainer);
     elements.forEach((element) => {
       task.append(element);
     });
 
+    task.dataset.id = todo.id;
+    dataContainer.addEventListener("click", () => {
+      DOMView.renderInfo(todo);
+    });
     return task;
   };
 
-  const _createTodo = (todo) => {
+  const createTodo = (todo) => {
     let taskContainer = DOMHandler.createElement("div", "taskContainer");
     let subtasksContainer = DOMHandler.createElement(
       "div",
       "subtasksContainer"
     );
     let task = createTask(todo);
+    let button = DOMHandler.createElement(
+      "button",
+      "addSubtask",
+      "+ Add subtask"
+    );
+
+    // Add event listener to create a subtask for this todo
+    button.addEventListener("click", (e) => {
+      DOMNew.createNewTodoModal(todo, e.target.parentElement);
+      DOMModal.showModal();
+    });
+    subtasksContainer.append(button);
     let subtasks = [];
     todo.children.forEach((task) => {
       let subtask = createTask(task, true);
@@ -81,7 +103,7 @@ const DOMTodo = (() => {
     });
 
     subtasks.forEach((subtask) => {
-      subtasksContainer.append(subtask);
+      subtasksContainer.prepend(subtask);
     });
 
     taskContainer.append(task);
@@ -92,12 +114,12 @@ const DOMTodo = (() => {
   const populatePending = (project) => {
     let pendingTodos = document.querySelector(".pendingTodos");
     project.pending.forEach((todo) => {
-      let bigTodo = _createTodo(todo);
+      let bigTodo = createTodo(todo);
       pendingTodos.append(bigTodo);
     });
   };
 
-  return { populatePending, createTask };
+  return { populatePending, createTask, createTodo };
 })();
 
 export default DOMTodo;

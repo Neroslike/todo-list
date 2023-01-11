@@ -11,6 +11,8 @@ $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
 
 .taskContainer {
   width: 100%;
+  display: flex;
+  flex-direction: column;
   margin-bottom: clamp(4px, 0.4vw, 8px);
 }
 
@@ -18,6 +20,7 @@ $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
   display: flex;
   background-color: #212529;
   width: 100%;
+  min-width: max-content;
   border-radius: 14px;
   overflow: hidden;
   border-top: 2px solid #a0b1c3;
@@ -92,11 +95,13 @@ $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  align-self: flex-end;
+  width: 90%;
 }
 
 .subtask {
-  width: 90%;
   margin: clamp(2px, 0.1vw, 4px) 0;
+  // justify-content: center;
 
   .taskMiniContainer {
     padding: clamp(8px, calc(0.4rem + 0.4vw), 48px);
@@ -125,4 +130,17 @@ $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
   opacity: 0.6;
   border: none;
   box-shadow: 0px 2px 0px rgba(255, 255, 255, 0.15), inset 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.taskDataContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1 2;
+  cursor: pointer;
+}
+
+.addSubtask {
+  margin-top: 0.3vw;
+  align-self: flex-start;
 }

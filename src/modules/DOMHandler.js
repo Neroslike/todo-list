@@ -19,7 +19,7 @@ const DOMHandler = (() => {
     let field = DOMHandler.createElement(element);
 
     if (field.tagName === "INPUT") field.type = type;
-    field.name = name;
+    field.name = name.split(" ").join("");
     field.id = name;
     label.htmlFor = name;
 

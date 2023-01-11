@@ -1,6 +1,9 @@
 import DOMHandler from "../DOMHandler";
 import Priority from "../priority";
 import close from "../../assets/close.svg";
+import Todo from "../todo";
+import DOMTodo from "./todo";
+import DOMModal from "./modal";
 
 const DOMNew = (() => {
   let modal = document.querySelector("#modalContainer");
@@ -26,7 +29,7 @@ const DOMNew = (() => {
     return form;
   };
 
-  const createNewTodoModal = () => {
+  const createNewTodoModal = (parent = null, todoContainer = null) => {
     let title = DOMHandler.createElement("h1", "newTitle", "Create todo");
     let form = _createForm();
     let createButton = DOMHandler.createElement(
@@ -34,10 +37,30 @@ const DOMNew = (() => {
       "createButton",
       "Create"
     );
+    let container = DOMHandler.createElement("div", "newContainer");
+    createButton.type = "button";
 
-    modal.append(title);
-    modal.append(form);
-    modal.append(createButton);
+    container.append(title);
+    form.append(createButton);
+    container.append(form);
+    modal.append(container);
+
+    createButton.addEventListener("click", () => {
+      let todo = createTodoObject(form, parent);
+      let todoElement = DOMTodo.createTask(todo, true);
+      todoContainer.insertBefore(todoElement, todoContainer.lastChild);
+      DOMModal.hideModal();
+    });
+  };
+
+  const createTodoObject = (form, parent) => {
+    let title = form.Title.value;
+    let date = form.Duedate.value;
+    let priority = form.Priority.selectedIndex + 1;
+    let description = form.Description.value;
+
+    let todo = new Todo(title, date, priority, description, false, parent);
+    return todo;
   };
 
   return { createNewTodoModal };

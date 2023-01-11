@@ -56,3 +56,9 @@ $responsive-prio-size: clamp(14px, calc(0.5rem + 0.4vw), 64px);
     display: none;
   }
 }
+
+.sidebarButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vw;
+}

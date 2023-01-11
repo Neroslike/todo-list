@@ -1,10 +1,11 @@
-import { da } from "date-fns/locale";
+import { da, de } from "date-fns/locale";
 import DOMHandler from "../DOMHandler";
 import DOMPriority from "./priority";
 import DOMTodo from "./todo";
 import Todo from "../todo";
 import close from "../../assets/close.svg";
 import Priority from "../priority";
+import DOMModal from "./modal";
 
 const DOMView = (() => {
   let modal = document.querySelector("#modalContainer");
@@ -63,6 +64,26 @@ const DOMView = (() => {
     return container;
   };
 
+  const _createButtons = () => {
+    let container = DOMHandler.createElement("div", "ButtonsView");
+    let deleteButton = DOMHandler.createElement(
+      "button",
+      "deleteButton",
+      "Delete"
+    );
+    let editButton = DOMHandler.createElement("button", "editButton", "Edit");
+    let checkButton = DOMHandler.createElement(
+      "button",
+      "checkButton",
+      "Check"
+    );
+
+    container.append(deleteButton);
+    container.append(editButton);
+    container.append(checkButton);
+    return container;
+  };
+
   const _createInfo = (todo) => {
     let infoContainer = DOMHandler.createElement("div", "infoContainer");
     let todoTitle = _createContent(todo.title, "titleView", "h1");
@@ -77,11 +98,17 @@ const DOMView = (() => {
       "div",
       "todoDataContainer"
     );
-    let todoSubtasks = _createSubTasks(todo.children);
+    let todoSubtasks;
+    if (todo.children) {
+      todoSubtasks = _createSubTasks(todo.children);
+    } else {
+      todoSubtasks = "";
+    }
     let mainTaskContainer = DOMHandler.createElement(
       "div",
       "mainTaskContainer"
     );
+    let buttons = _createButtons();
 
     mainTaskContainer.append(todoTitle);
     mainTaskContainer.append(DOMHandler.createElement("hr"));
@@ -90,8 +117,13 @@ const DOMView = (() => {
     todoDataContainer.append(todoPriority);
     mainTaskContainer.append(todoDataContainer);
     infoContainer.append(mainTaskContainer);
-    infoContainer.append(DOMHandler.createElement("div", "separator"));
-    infoContainer.append(todoSubtasks);
+    if (!todo.isSubtask()) {
+      infoContainer.append(DOMHandler.createElement("div", "separator"));
+      infoContainer.append(todoSubtasks);
+      infoContainer.append(DOMHandler.createElement("div", "separator"));
+    }
+
+    infoContainer.append(buttons);
 
     return infoContainer;
   };
@@ -99,6 +131,7 @@ const DOMView = (() => {
   const renderInfo = (todo) => {
     let todoInfo = _createInfo(todo);
     modal.append(todoInfo);
+    DOMModal.showModal();
   };
 
   return { renderInfo };
