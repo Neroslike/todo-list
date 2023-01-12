@@ -1,13 +1,8 @@
+//Import statements
 import "./style/main.scss";
-import Todo from "./modules/todo";
-import helper from "./modules/helper";
-import Project from "./modules/project";
-import DOMHandler from "./modules/DOMHandler";
-import DOMPriority from "./modules/components/priority";
-import Priority from "./modules/priority";
-import DOMTodo from "./modules/components/todo";
-import DOMProject from "./modules/components/project";
-import DOMNew from "./modules/components/new";
-import DOMView from "./modules/components/view";
-import DOMModal from "./modules/components/modal";
-import addNewTodo from "./modules/components/addNewTodo";
+import Neros from "./modules/Neros";
+import TestComponent from "./modules/components/TestComponent";
+import TextComponent from "./modules/components/TextComponent";
+
+//Initialize modules
+const pending = new Neros("pendingTodos");
