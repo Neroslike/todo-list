@@ -24,7 +24,7 @@ class Todo {
     this.#parent = parent;
     if (this.#parent === null) {
       this.#children = [];
-      Project.selected.addPending(this);
+      // Project.selected.addPending(this);
     } else {
       this.#children = false;
     }

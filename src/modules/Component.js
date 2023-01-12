@@ -8,6 +8,13 @@ class Component {
   view() {
     return this.template(this.state);
   }
+
+  element = () => {
+    return new DOMParser().parseFromString(
+      this.template(this.state),
+      "text/html"
+    ).body.firstChild;
+  };
 }
 
 export default Component;

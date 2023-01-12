@@ -15,6 +15,10 @@ class Priority {
     return [...Priority.#prioritiesArray];
   }
 
+  static priority(number) {
+    return Priority.#prioritiesArray[number - 1];
+  }
+
   constructor(name, number, color) {
     this.#name = name;
     this.#number = number;

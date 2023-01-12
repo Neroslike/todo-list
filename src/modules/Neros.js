@@ -11,12 +11,11 @@ class Neros {
 
   updateView() {
     if (this.components) {
-      // let mergedViews = "";
+      let mergedViews = "";
       Object.keys(this.components).forEach((key) => {
-        // mergedViews += this.components[key].view();
-        this.NerosElement.append(this.components[key].view());
+        mergedViews += this.components[key].view();
       });
-      // this.NerosElement.innerHTML = mergedViews;
+      this.NerosElement.innerHTML = mergedViews;
     }
   }
 }
