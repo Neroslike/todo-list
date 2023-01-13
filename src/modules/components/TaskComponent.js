@@ -9,6 +9,7 @@ import unchecked from "../../assets/unchecked.svg";
 class TaskComponent extends Component {
   constructor(name, state) {
     super(name, state);
+    // Create the priority color html and color, I should put this into its own class
     this.colorHTML = (priority) =>
       `<div class="priorityColor" style="background-color: ${priority.color}"></div>`;
     this.colorMini = new MiniContainerComponent("priority", {
@@ -16,6 +17,7 @@ class TaskComponent extends Component {
     });
   }
 
+  // Create all the static buttons needed for a task, these aren't dynamic since all tasks have the same buttons
   static imgHTML = (actionSVG) => `<img class="taskButton" src=${actionSVG}>`;
   static checkMini = new MiniContainerComponent("check", {
     html: TaskComponent.imgHTML(unchecked),
@@ -29,10 +31,10 @@ class TaskComponent extends Component {
 
   template = (state) =>
     `
-    <div class="task">
+    <div class="${state.classes.join(" ")}">
       ${TaskComponent.checkMini.view()}
       ${this.colorMini.view()}
-      <div class=taskDataContainer>
+      <div class="taskDataContainer">
         <div class="taskTitle">
           <p>${state.todo.title}</p>
         </div>

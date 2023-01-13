@@ -5,10 +5,12 @@ class Component {
     this.template = template;
   }
 
+  // This method returns a template literal of the component
   view() {
     return this.template(this.state);
   }
 
+  // This method returns an HTML element object of the component
   element = () => {
     return new DOMParser().parseFromString(
       this.template(this.state),
