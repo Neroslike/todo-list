@@ -15,6 +15,8 @@ class TaskComponent extends Component {
     this.colorMini = new MiniContainerComponent("priority", {
       html: this.colorHTML(Priority.priority(state.todo.priority)),
     });
+    this.colorElement = this.colorMini.DOMelement();
+    this.colorElement.addEventListener("click", () => console.log("sex"));
   }
 
   // Create all the static buttons needed for a task, these aren't dynamic since all tasks have the same buttons
@@ -33,7 +35,7 @@ class TaskComponent extends Component {
     `
     <div class="${state.classes.join(" ")}">
       ${TaskComponent.checkMini.view()}
-      ${this.colorMini.view()}
+      ${this.colorElement.outerHTML}
       <div class="taskDataContainer">
         <div class="taskTitle">
           <p>${state.todo.title}</p>

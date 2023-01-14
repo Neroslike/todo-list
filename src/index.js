@@ -33,6 +33,9 @@ todo1.createTodo(
   "This is a todo made with OOP principles 2"
 );
 
+const project2 = new Project("Second big project");
+Project.selected = project2;
+
 let todo2 = new Todo(
   "second OOP todo",
   "24-05-2023",
@@ -54,8 +57,16 @@ todo2.createTodo(
   "This is a todo made with OOP principles 2"
 );
 
-let projectComponent = new ProjectComponent("project", { project: project });
+let projectComponent = new ProjectComponent("bigtodo", { project: project });
+let project2Component = new ProjectComponent("secondbigtodo", {
+  project: project2,
+});
+
+// Project.selected = null;
+
 projectModule.registerComponent(projectComponent);
+projectModule.registerComponent(project2Component);
+
 // priorities.registerComponent(TestComponent);
 // let a = new TextComponent("text", {
 //   name: "Domestic animals",

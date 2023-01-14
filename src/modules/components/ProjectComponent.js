@@ -10,7 +10,9 @@ class ProjectComponent extends Component {
     </div>
     `;
 
+  // This method displays all todos belonging to this project
   displayTodos() {
+    // console.log(this);
     const pending = new Neros("pendingTodos");
 
     let todos = this.state.project.pending.map(
@@ -25,9 +27,17 @@ class ProjectComponent extends Component {
     });
   }
 
-  view() {
-    this.displayTodos();
-    return super.view();
+  DOMelement() {
+    return super.DOMelement("click", (e) => {
+      this.handleID(e.currentTarget);
+      this.displayTodos();
+    });
+  }
+
+  handleID(target) {
+    let selected = document.querySelector("#selectedProject");
+    if (selected) selected.id = "";
+    target.id = "selectedProject";
   }
 }
 
