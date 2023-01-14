@@ -11,11 +11,18 @@ class Component {
   }
 
   // This method returns an HTML element object of the component
-  element = () => {
-    return new DOMParser().parseFromString(
+  DOMelement(e, func) {
+    let element = new DOMParser().parseFromString(
       this.template(this.state),
       "text/html"
     ).body.firstChild;
+
+    element.addEventListener(e, func);
+    return element;
+  }
+
+  addListener = (element, event, func) => {
+    element.addEventListener(event, func);
   };
 }
 

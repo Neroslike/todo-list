@@ -10,6 +10,7 @@ class ProjectComponent extends Component {
     </div>
     `;
 
+  // This method displays all todos belonging to this project
   displayTodos() {
     const pending = new Neros("pendingTodos");
 
@@ -25,9 +26,9 @@ class ProjectComponent extends Component {
     });
   }
 
-  view() {
-    this.displayTodos();
-    return super.view();
+  DOMelement() {
+    // this.displayTodos();
+    return super.DOMelement("click", this.displayTodos.bind(this));
   }
 }
 
