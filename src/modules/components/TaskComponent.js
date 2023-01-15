@@ -7,6 +7,21 @@ import checked from "../../assets/checked.svg";
 import unchecked from "../../assets/unchecked.svg";
 
 class TaskComponent extends Component {
+  static eventHandler = {
+    checkButton: () => {
+      console.log("The check button was pressed", this);
+    },
+    priorityButton: () => {
+      console.log("The priority button was pressed", this);
+    },
+    editButton: () => {
+      console.log("The edit button was pressed", this);
+    },
+    deleteButton: () => {
+      console.log("The delete button was pressed", this);
+    },
+  };
+
   constructor(name, state) {
     super(name, state);
     // Create the priority color html and color, I should put this into its own class
@@ -15,8 +30,6 @@ class TaskComponent extends Component {
     this.colorMini = new MiniContainerComponent("priority", {
       html: this.colorHTML(Priority.priority(state.todo.priority)),
     });
-    this.colorElement = this.colorMini.DOMelement();
-    this.colorElement.addEventListener("click", () => console.log("sex"));
   }
 
   // Create all the static buttons needed for a task, these aren't dynamic since all tasks have the same buttons
@@ -34,8 +47,7 @@ class TaskComponent extends Component {
   template = (state) =>
     `
     <div class="${state.classes.join(" ")}">
-      ${TaskComponent.checkMini.view()}
-      ${this.colorElement.outerHTML}
+
       <div class="taskDataContainer">
         <div class="taskTitle">
           <p>${state.todo.title}</p>
@@ -44,10 +56,40 @@ class TaskComponent extends Component {
           <p>5 days left</p>
         </div>
       </div>
-      ${TaskComponent.editMini.view()}
-      ${TaskComponent.deleteMini.view()}
+
     </div>
   `;
+
+  miniEventListeners(element) {
+    let check = element.querySelector(".check");
+  }
+
+  DOMelement() {
+    let element = super.DOMelement();
+    let check = TaskComponent.checkMini.DOMelement(
+      "click",
+      TaskComponent.eventHandler.checkButton.bind
+    );
+    let priority = this.colorMini.DOMelement(
+      "click",
+      TaskComponent.eventHandler.priorityButton.bind
+    );
+    let edit = TaskComponent.editMini.DOMelement(
+      "click",
+      TaskComponent.eventHandler.editButton.bind
+    );
+    let deleteBtn = TaskComponent.deleteMini.DOMelement(
+      "click",
+      TaskComponent.eventHandler.deleteButton.bind
+    );
+
+    element.prepend(priority);
+    element.prepend(check);
+    element.append(edit);
+    element.append(deleteBtn);
+    return element;
+    // this.miniEventListeners(element);
+  }
 }
 
 export default TaskComponent;
