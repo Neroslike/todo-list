@@ -3,6 +3,14 @@ import Neros from "../Neros";
 import TodoComponent from "./TodoComponent";
 
 class ProjectComponent extends Component {
+  static resetView() {
+    let pending = document.querySelector("#pendingTodos");
+    let completed = document.querySelector("#completedTodos");
+
+    pending.innerHTML = "";
+    completed.innerHTML = "";
+  }
+
   template = (state) =>
     `
     <div class="projectContainer">
@@ -11,10 +19,10 @@ class ProjectComponent extends Component {
     `;
 
   // This method displays all todos belonging to this project
-  displayTodos() {
-    const pending = new Neros("pendingTodos");
+  displayTodos(selector, projectTodos) {
+    const element = new Neros(`${selector}Todos`);
 
-    let todos = this.state.project.pending.map(
+    let todos = projectTodos.map(
       (task, index) =>
         new TodoComponent(`todo${index}`, {
           task: task,
@@ -22,14 +30,17 @@ class ProjectComponent extends Component {
         })
     );
     todos.forEach((todo) => {
-      pending.registerComponent(todo);
+      element.registerComponent(todo);
     });
   }
 
   DOMelement() {
     return super.DOMelement("click", (e) => {
       this.handleID(e.currentTarget);
-      this.displayTodos();
+      // Reset the board before displaying this project todos
+      // ProjectComponent.resetView();
+      this.displayTodos("pending", this.state.project.pending);
+      this.displayTodos("completed", this.state.project.completed);
     });
   }
 

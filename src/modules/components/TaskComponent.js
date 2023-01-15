@@ -15,19 +15,31 @@ class TaskComponent extends Component {
     this.colorMini = new MiniContainerComponent("priority", {
       html: this.colorHTML(Priority.priority(state.todo.priority)),
     });
+    // If this todo is checked, the dom element will have the class "completedTask"
+    if (this.state.todo.check) this.state.classes.push("completedTask");
   }
 
   // Create all the static buttons needed for a task, these aren't dynamic since all tasks have the same buttons
   static imgHTML = (actionSVG) => `<img class="taskButton" src=${actionSVG}>`;
-  static checkMini = new MiniContainerComponent("check", {
-    html: TaskComponent.imgHTML(unchecked),
-  });
   static editMini = new MiniContainerComponent("edit", {
     html: TaskComponent.imgHTML(edit),
   });
   static deleteMini = new MiniContainerComponent("delete", {
     html: TaskComponent.imgHTML(deleteTask),
   });
+
+  // Return a miniContainer with the corresponding svg file, checked if todo isChecked
+  // property is true, unchecked otherwise.
+  checkMini = () => {
+    return new MiniContainerComponent("check", {
+      html: TaskComponent.imgHTML(this.checkState()),
+    });
+  };
+
+  // This method checks the state of the isChecked property from todos
+  checkState = () => {
+    return this.state.todo.check ? checked : unchecked;
+  };
 
   template = (state) =>
     `
@@ -43,13 +55,9 @@ class TaskComponent extends Component {
     </div>
   `;
 
-  miniEventListeners(element) {
-    let check = element.querySelector(".check");
-  }
-
   DOMelement() {
     let element = super.DOMelement();
-    let check = TaskComponent.checkMini.DOMelement(
+    let check = this.checkMini().DOMelement(
       "click",
       this.eventHandler().checkButton
     );
@@ -78,16 +86,15 @@ class TaskComponent extends Component {
     return {
       checkButton: (e) => {
         let img = e.currentTarget.firstElementChild;
-        if (this.state.todo.isChecked) {
-          this.state.todo.isChecked = false;
+        if (this.state.todo.check) {
+          this.state.todo.toggleCheck();
           e.currentTarget.parentElement.classList.remove("completedTask");
           img.src = unchecked;
         } else {
-          this.state.todo.isChecked = true;
+          this.state.todo.toggleCheck();
           e.currentTarget.parentElement.classList.add("completedTask");
           img.src = checked;
         }
-        console.log(this.state);
       },
       priorityButton: () => {
         console.log("The priority button was pressed", this.state);

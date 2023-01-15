@@ -13,6 +13,7 @@ class Todo {
   #children;
   #id;
   #isChecked;
+  #project;
 
   constructor(title, date, priority, description, isChecked, parent = null) {
     this.title = title;
@@ -22,16 +23,21 @@ class Todo {
     this.#isChecked = isChecked;
     this.#id = idAssigner.getIdNumber();
     this.#parent = parent;
+    this.#project = Project.selected;
     if (this.#parent === null) {
       this.#children = [];
-      Project.selected.addPending(this);
+      // If the todo is already checked add it to the completed tasks array
+      // of the parent project
+      this.check
+        ? Project.selected.addCompleted(this)
+        : Project.selected.addPending(this);
     } else {
       this.#children = false;
     }
   }
 
-  createTodo(title, date, priority, description) {
-    let a = new Todo(title, date, priority, description, false, this);
+  createTodo(title, date, priority, description, isChecked) {
+    let a = new Todo(title, date, priority, description, isChecked, this);
     this.#children.push(a);
     return a;
   }
@@ -54,9 +60,13 @@ class Todo {
       this.#isChecked = false;
     } else {
       this.#isChecked = true;
-      //If the todo is a parent check all it's children
+      // If the todo is a parent check all it's children
       if (this.#parent === null) this.#recursiveCheck(this.#children);
     }
+  }
+
+  get project() {
+    return this.#project;
   }
 
   get check() {
