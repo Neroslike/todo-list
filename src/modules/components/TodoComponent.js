@@ -3,6 +3,16 @@ import Neros from "../Neros";
 import TaskComponent from "./TaskComponent";
 
 class TodoComponent extends Component {
+  static moveToCompleted(element) {
+    let completed = document.querySelector("#completedTodos");
+    completed.append(element.parentElement);
+  }
+
+  static moveToPending(element) {
+    let pending = document.querySelector("#pendingTodos");
+    pending.append(element.parentElement);
+  }
+
   constructor(name, state) {
     super(name, state);
     this.createTaskComponents();

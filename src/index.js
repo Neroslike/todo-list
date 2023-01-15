@@ -16,21 +16,24 @@ let todo1 = new Todo(
   "First OOP todo",
   "24-05-2023",
   4,
-  "This is a todo made with OOP principles"
+  "This is a todo made with OOP principles",
+  false
 );
 
 todo1.createTodo(
   "first of First OOP todo",
   "24-05-2023",
   2,
-  "This is a todo made with OOP principles 1"
+  "This is a todo made with OOP principles 1",
+  false
 );
 
 todo1.createTodo(
   "second of First OOP todo",
   "24-05-2023",
   5,
-  "This is a todo made with OOP principles 2"
+  "This is a todo made with OOP principles 2",
+  false
 );
 
 const project2 = new Project("Second big project");
@@ -40,21 +43,24 @@ let todo2 = new Todo(
   "second OOP todo",
   "24-05-2023",
   1,
-  "This is a todo made with OOP principles"
+  "This is a todo made with OOP principles",
+  false
 );
 
 todo2.createTodo(
   "first of second OOP todo",
   "24-05-2023",
   2,
-  "This is a todo made with OOP principles 1"
+  "This is a todo made with OOP principles 1",
+  false
 );
 
 todo2.createTodo(
   "second of second OOP todo",
   "24-05-2023",
   3,
-  "This is a todo made with OOP principles 2"
+  "This is a todo made with OOP principles 2",
+  false
 );
 
 let projectComponent = new ProjectComponent("bigtodo", { project: project });

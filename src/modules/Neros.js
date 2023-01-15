@@ -15,7 +15,6 @@ class Neros {
       Object.keys(this.components).forEach((key) => {
         this.NerosElement.append(this.components[key].DOMelement());
       });
-      // this.NerosElement.innerHTML = mergedViews;
     }
   }
 }

@@ -14,20 +14,37 @@ class TaskComponent extends Component {
       `<div class="priorityColor" style="background-color: ${priority.color}"></div>`;
     this.colorMini = new MiniContainerComponent("priority", {
       html: this.colorHTML(Priority.priority(state.todo.priority)),
+      typeClass: "priorityButtonMini",
     });
+    this.state.todo.component = this;
+    // If this todo is checked, the dom element will have the class "completedTask"
+    if (this.state.todo.check) this.state.classes.push("completedTask");
   }
 
   // Create all the static buttons needed for a task, these aren't dynamic since all tasks have the same buttons
   static imgHTML = (actionSVG) => `<img class="taskButton" src=${actionSVG}>`;
-  static checkMini = new MiniContainerComponent("check", {
-    html: TaskComponent.imgHTML(unchecked),
-  });
   static editMini = new MiniContainerComponent("edit", {
     html: TaskComponent.imgHTML(edit),
+    typeClass: "editButtonMini",
   });
   static deleteMini = new MiniContainerComponent("delete", {
     html: TaskComponent.imgHTML(deleteTask),
+    typeClass: "deleteButtonMini",
   });
+
+  // Return a miniContainer with the corresponding svg file, checked if todo isChecked
+  // property is true, unchecked otherwise.
+  checkMini = () => {
+    return new MiniContainerComponent("check", {
+      html: TaskComponent.imgHTML(this.checkState()),
+      typeClass: "checkButtonMini",
+    });
+  };
+
+  // This method checks the state of the isChecked property from todos
+  checkState = () => {
+    return this.state.todo.check ? checked : unchecked;
+  };
 
   template = (state) =>
     `
@@ -43,13 +60,9 @@ class TaskComponent extends Component {
     </div>
   `;
 
-  miniEventListeners(element) {
-    let check = element.querySelector(".check");
-  }
-
   DOMelement() {
     let element = super.DOMelement();
-    let check = TaskComponent.checkMini.DOMelement(
+    let check = this.checkMini().DOMelement(
       "click",
       this.eventHandler().checkButton
     );
@@ -70,15 +83,40 @@ class TaskComponent extends Component {
     element.prepend(check);
     element.append(edit);
     element.append(deleteBtn);
+    this.state.todo.domElement = element;
     return element;
     // this.miniEventListeners(element);
+  }
+
+  check(element) {
+    if (!element.classList.contains("completedTask")) {
+      let checkBtn = element.querySelector(".checkButtonMini");
+      checkBtn.click();
+    }
+  }
+
+  checkChildren() {
+    this.state.todo.children.forEach((element) => {
+      this.check(element.domElement);
+    });
+  }
+
+  checkParent() {
+    let element = this.state.todo.parent;
+    this.check(element.domElement);
   }
 
   eventHandler = () => {
     return {
       checkButton: (e) => {
         let img = e.currentTarget.firstElementChild;
-        img.src === checked ? (img.src = unchecked) : (img.src = checked);
+        console.log(this.state);
+        if (this.state.todo.check) {
+          this.state.todo.toggleCheck(e.currentTarget.parentElement, img);
+        } else {
+          this.state.todo.toggleCheck(e.currentTarget.parentElement, img);
+          if (this.state.todo.children) this.checkChildren();
+        }
       },
       priorityButton: () => {
         console.log("The priority button was pressed", this.state);

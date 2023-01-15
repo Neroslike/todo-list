@@ -1,6 +1,9 @@
 import helper from "./helper";
 import idAssigner from "./idAssigner";
 import Project from "./project";
+import TodoComponent from "./components/TodoComponent";
+import checked from "../assets/checked.svg";
+import unchecked from "../assets/unchecked.svg";
 
 /* 1.- Be able to create and delete todo's ✔️
    2.- If a todo's is a parent, they get added to the pending tasks when created ✔️
@@ -13,6 +16,7 @@ class Todo {
   #children;
   #id;
   #isChecked;
+  #project;
 
   constructor(title, date, priority, description, isChecked, parent = null) {
     this.title = title;
@@ -22,16 +26,23 @@ class Todo {
     this.#isChecked = isChecked;
     this.#id = idAssigner.getIdNumber();
     this.#parent = parent;
+    this.#project = Project.selected;
+    this.component = null;
+    this.domElement = null;
     if (this.#parent === null) {
       this.#children = [];
-      Project.selected.addPending(this);
+      // If the todo is already checked add it to the completed tasks array
+      // of the parent project
+      this.check
+        ? Project.selected.addCompleted(this)
+        : Project.selected.addPending(this);
     } else {
       this.#children = false;
     }
   }
 
-  createTodo(title, date, priority, description) {
-    let a = new Todo(title, date, priority, description, false, this);
+  createTodo(title, date, priority, description, isChecked) {
+    let a = new Todo(title, date, priority, description, isChecked, this);
     this.#children.push(a);
     return a;
   }
@@ -49,14 +60,23 @@ class Todo {
     return this.#parent;
   }
 
-  toggleCheck() {
+  toggleCheck(element, img) {
     if (this.#isChecked) {
       this.#isChecked = false;
+      element.classList.remove("completedTask");
+      img.src = unchecked;
+      if (this.#parent === null) TodoComponent.moveToPending(element);
     } else {
       this.#isChecked = true;
-      //If the todo is a parent check all it's children
-      if (this.#parent === null) this.#recursiveCheck(this.#children);
+      element.classList.add("completedTask");
+      img.src = checked;
+      // If the todo is a parent check all it's children
+      if (this.#parent === null) TodoComponent.moveToCompleted(element);
     }
+  }
+
+  get project() {
+    return this.#project;
   }
 
   get check() {

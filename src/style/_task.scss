@@ -2,11 +2,12 @@ $big-responsive-text-size: clamp(8px, calc(0.5rem + 0.7vw), 64px);
 $big-responsive-button-size: clamp(14px, calc(0.5rem + 0.7vw), 64px);
 $small-responsive-text-size: clamp(6px, calc(0.5rem + 0.4vw), 36px);
 $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
-#pendingTodos {
+.TodosContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 50px;
+  overflow-y: scroll;
 }
 
 .taskContainer {
@@ -35,6 +36,8 @@ $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
   justify-content: center;
   align-items: center;
   padding: clamp(8px, calc(0.5rem + 0.5vw), 64px);
+  cursor: pointer;
+  user-select: none;
 }
 
 .taskColor {
