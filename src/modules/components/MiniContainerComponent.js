@@ -6,7 +6,7 @@ import unchecked from "../../assets/unchecked.svg";
 
 class MiniContainerComponent extends Component {
   template = (state) => `
-    <div class="taskMiniContainer">
+    <div class="taskMiniContainer ${state.typeClass}">
       ${state.html}
     </div>
   `;

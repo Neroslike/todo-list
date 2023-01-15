@@ -1,6 +1,9 @@
 import helper from "./helper";
 import idAssigner from "./idAssigner";
 import Project from "./project";
+import TodoComponent from "./components/TodoComponent";
+import checked from "../assets/checked.svg";
+import unchecked from "../assets/unchecked.svg";
 
 /* 1.- Be able to create and delete todo's ✔️
    2.- If a todo's is a parent, they get added to the pending tasks when created ✔️
@@ -24,6 +27,8 @@ class Todo {
     this.#id = idAssigner.getIdNumber();
     this.#parent = parent;
     this.#project = Project.selected;
+    this.component = null;
+    this.domElement = null;
     if (this.#parent === null) {
       this.#children = [];
       // If the todo is already checked add it to the completed tasks array
@@ -55,13 +60,18 @@ class Todo {
     return this.#parent;
   }
 
-  toggleCheck() {
+  toggleCheck(element, img) {
     if (this.#isChecked) {
       this.#isChecked = false;
+      element.classList.remove("completedTask");
+      img.src = unchecked;
+      if (this.#parent === null) TodoComponent.moveToPending(element);
     } else {
       this.#isChecked = true;
+      element.classList.add("completedTask");
+      img.src = checked;
       // If the todo is a parent check all it's children
-      if (this.#parent === null) this.#recursiveCheck(this.#children);
+      if (this.#parent === null) TodoComponent.moveToCompleted(element);
     }
   }
 

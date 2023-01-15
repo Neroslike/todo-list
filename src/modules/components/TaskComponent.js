@@ -14,7 +14,9 @@ class TaskComponent extends Component {
       `<div class="priorityColor" style="background-color: ${priority.color}"></div>`;
     this.colorMini = new MiniContainerComponent("priority", {
       html: this.colorHTML(Priority.priority(state.todo.priority)),
+      typeClass: "priorityButtonMini",
     });
+    this.state.todo.component = this;
     // If this todo is checked, the dom element will have the class "completedTask"
     if (this.state.todo.check) this.state.classes.push("completedTask");
   }
@@ -23,9 +25,11 @@ class TaskComponent extends Component {
   static imgHTML = (actionSVG) => `<img class="taskButton" src=${actionSVG}>`;
   static editMini = new MiniContainerComponent("edit", {
     html: TaskComponent.imgHTML(edit),
+    typeClass: "editButtonMini",
   });
   static deleteMini = new MiniContainerComponent("delete", {
     html: TaskComponent.imgHTML(deleteTask),
+    typeClass: "deleteButtonMini",
   });
 
   // Return a miniContainer with the corresponding svg file, checked if todo isChecked
@@ -33,6 +37,7 @@ class TaskComponent extends Component {
   checkMini = () => {
     return new MiniContainerComponent("check", {
       html: TaskComponent.imgHTML(this.checkState()),
+      typeClass: "checkButtonMini",
     });
   };
 
@@ -78,22 +83,39 @@ class TaskComponent extends Component {
     element.prepend(check);
     element.append(edit);
     element.append(deleteBtn);
+    this.state.todo.domElement = element;
     return element;
     // this.miniEventListeners(element);
+  }
+
+  check(element) {
+    if (!element.classList.contains("completedTask")) {
+      let checkBtn = element.querySelector(".checkButtonMini");
+      checkBtn.click();
+    }
+  }
+
+  checkChildren() {
+    this.state.todo.children.forEach((element) => {
+      this.check(element.domElement);
+    });
+  }
+
+  checkParent() {
+    let element = this.state.todo.parent;
+    this.check(element.domElement);
   }
 
   eventHandler = () => {
     return {
       checkButton: (e) => {
         let img = e.currentTarget.firstElementChild;
+        console.log(this.state);
         if (this.state.todo.check) {
-          this.state.todo.toggleCheck();
-          e.currentTarget.parentElement.classList.remove("completedTask");
-          img.src = unchecked;
+          this.state.todo.toggleCheck(e.currentTarget.parentElement, img);
         } else {
-          this.state.todo.toggleCheck();
-          e.currentTarget.parentElement.classList.add("completedTask");
-          img.src = checked;
+          this.state.todo.toggleCheck(e.currentTarget.parentElement, img);
+          if (this.state.todo.children) this.checkChildren();
         }
       },
       priorityButton: () => {
