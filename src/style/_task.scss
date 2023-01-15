@@ -35,6 +35,7 @@ $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
   justify-content: center;
   align-items: center;
   padding: clamp(8px, calc(0.5rem + 0.5vw), 64px);
+  cursor: pointer;
 }
 
 .taskColor {

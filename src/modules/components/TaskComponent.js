@@ -78,7 +78,16 @@ class TaskComponent extends Component {
     return {
       checkButton: (e) => {
         let img = e.currentTarget.firstElementChild;
-        img.src === checked ? (img.src = unchecked) : (img.src = checked);
+        if (this.state.todo.isChecked) {
+          this.state.todo.isChecked = false;
+          e.currentTarget.parentElement.classList.remove("completedTask");
+          img.src = unchecked;
+        } else {
+          this.state.todo.isChecked = true;
+          e.currentTarget.parentElement.classList.add("completedTask");
+          img.src = checked;
+        }
+        console.log(this.state);
       },
       priorityButton: () => {
         console.log("The priority button was pressed", this.state);
