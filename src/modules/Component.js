@@ -12,10 +12,8 @@ class Component {
 
   // This method returns an HTML element object of the component
   DOMelement(e, func) {
-    let element = new DOMParser().parseFromString(
-      this.template(this.state),
-      "text/html"
-    ).body.firstChild;
+    let element = new DOMParser().parseFromString(this.view(), "text/html").body
+      .firstChild;
 
     element.addEventListener(e, func);
     return element;

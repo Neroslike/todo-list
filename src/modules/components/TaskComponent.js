@@ -15,8 +15,6 @@ class TaskComponent extends Component {
     this.colorMini = new MiniContainerComponent("priority", {
       html: this.colorHTML(Priority.priority(state.todo.priority)),
     });
-    this.colorElement = this.colorMini.DOMelement();
-    this.colorElement.addEventListener("click", () => console.log("sex"));
   }
 
   // Create all the static buttons needed for a task, these aren't dynamic since all tasks have the same buttons
@@ -34,8 +32,6 @@ class TaskComponent extends Component {
   template = (state) =>
     `
     <div class="${state.classes.join(" ")}">
-      ${TaskComponent.checkMini.view()}
-      ${this.colorElement.outerHTML}
       <div class="taskDataContainer">
         <div class="taskTitle">
           <p>${state.todo.title}</p>
@@ -44,10 +40,57 @@ class TaskComponent extends Component {
           <p>5 days left</p>
         </div>
       </div>
-      ${TaskComponent.editMini.view()}
-      ${TaskComponent.deleteMini.view()}
     </div>
   `;
+
+  miniEventListeners(element) {
+    let check = element.querySelector(".check");
+  }
+
+  DOMelement() {
+    let element = super.DOMelement();
+    let check = TaskComponent.checkMini.DOMelement(
+      "click",
+      this.eventHandler().checkButton
+    );
+    let priority = this.colorMini.DOMelement(
+      "click",
+      this.eventHandler().priorityButton
+    );
+    let edit = TaskComponent.editMini.DOMelement(
+      "click",
+      this.eventHandler().editButton
+    );
+    let deleteBtn = TaskComponent.deleteMini.DOMelement(
+      "click",
+      this.eventHandler().deleteButton
+    );
+
+    element.prepend(priority);
+    element.prepend(check);
+    element.append(edit);
+    element.append(deleteBtn);
+    return element;
+    // this.miniEventListeners(element);
+  }
+
+  eventHandler = () => {
+    return {
+      checkButton: (e) => {
+        let img = e.currentTarget.firstElementChild;
+        img.src === checked ? (img.src = unchecked) : (img.src = checked);
+      },
+      priorityButton: () => {
+        console.log("The priority button was pressed", this.state);
+      },
+      editButton: () => {
+        console.log("The edit button was pressed", this.state);
+      },
+      deleteButton: () => {
+        console.log("The delete button was pressed", this.state);
+      },
+    };
+  };
 }
 
 export default TaskComponent;

@@ -1,4 +1,5 @@
 import Component from "../Component";
+import Neros from "../Neros";
 import TaskComponent from "./TaskComponent";
 
 class TodoComponent extends Component {
@@ -10,9 +11,7 @@ class TodoComponent extends Component {
   template = (state) =>
     `
     <div class="taskContainer">
-      ${state.task}
       <div class="subtasksContainer">
-      ${state.subtasks}
       </div>
     </div>
   `;
@@ -25,16 +24,25 @@ class TodoComponent extends Component {
     this.state.task = new TaskComponent("task", {
       todo: this.state.task,
       classes: ["task"],
-    }).view();
+    }).DOMelement();
     // This takes the children array and applies the same process above to each task
-    this.state.subtasks = this.state.subtasks
-      .map((task) =>
-        new TaskComponent("subtask", {
-          todo: task,
-          classes: ["task", "subtask"],
-        }).view()
-      )
-      .join("");
+    this.state.subtasks = this.state.subtasks.map((task) =>
+      new TaskComponent("subtask", {
+        todo: task,
+        classes: ["task", "subtask"],
+      }).DOMelement()
+    );
+  }
+
+  DOMelement() {
+    let element = super.DOMelement();
+    let subtask = element.querySelector(".subtasksContainer");
+
+    element.prepend(this.state.task);
+    this.state.subtasks.forEach((task) => {
+      subtask.append(task);
+    });
+    return element;
   }
 }
 
