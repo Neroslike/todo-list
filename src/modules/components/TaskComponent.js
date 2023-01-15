@@ -7,21 +7,6 @@ import checked from "../../assets/checked.svg";
 import unchecked from "../../assets/unchecked.svg";
 
 class TaskComponent extends Component {
-  static eventHandler = {
-    checkButton: () => {
-      console.log("The check button was pressed", this);
-    },
-    priorityButton: () => {
-      console.log("The priority button was pressed", this);
-    },
-    editButton: () => {
-      console.log("The edit button was pressed", this);
-    },
-    deleteButton: () => {
-      console.log("The delete button was pressed", this);
-    },
-  };
-
   constructor(name, state) {
     super(name, state);
     // Create the priority color html and color, I should put this into its own class
@@ -47,7 +32,6 @@ class TaskComponent extends Component {
   template = (state) =>
     `
     <div class="${state.classes.join(" ")}">
-
       <div class="taskDataContainer">
         <div class="taskTitle">
           <p>${state.todo.title}</p>
@@ -56,7 +40,6 @@ class TaskComponent extends Component {
           <p>5 days left</p>
         </div>
       </div>
-
     </div>
   `;
 
@@ -68,19 +51,19 @@ class TaskComponent extends Component {
     let element = super.DOMelement();
     let check = TaskComponent.checkMini.DOMelement(
       "click",
-      TaskComponent.eventHandler.checkButton.bind
+      this.eventHandler().checkButton
     );
     let priority = this.colorMini.DOMelement(
       "click",
-      TaskComponent.eventHandler.priorityButton.bind
+      this.eventHandler().priorityButton
     );
     let edit = TaskComponent.editMini.DOMelement(
       "click",
-      TaskComponent.eventHandler.editButton.bind
+      this.eventHandler().editButton
     );
     let deleteBtn = TaskComponent.deleteMini.DOMelement(
       "click",
-      TaskComponent.eventHandler.deleteButton.bind
+      this.eventHandler().deleteButton
     );
 
     element.prepend(priority);
@@ -90,6 +73,24 @@ class TaskComponent extends Component {
     return element;
     // this.miniEventListeners(element);
   }
+
+  eventHandler = () => {
+    return {
+      checkButton: (e) => {
+        let img = e.currentTarget.firstElementChild;
+        img.src === checked ? (img.src = unchecked) : (img.src = checked);
+      },
+      priorityButton: () => {
+        console.log("The priority button was pressed", this.state);
+      },
+      editButton: () => {
+        console.log("The edit button was pressed", this.state);
+      },
+      deleteButton: () => {
+        console.log("The delete button was pressed", this.state);
+      },
+    };
+  };
 }
 
 export default TaskComponent;

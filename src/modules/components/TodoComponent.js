@@ -32,7 +32,6 @@ class TodoComponent extends Component {
         classes: ["task", "subtask"],
       }).DOMelement()
     );
-    console.log(this.state);
   }
 
   DOMelement() {
