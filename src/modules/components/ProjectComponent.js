@@ -12,7 +12,6 @@ class ProjectComponent extends Component {
 
   // This method displays all todos belonging to this project
   displayTodos() {
-    // console.log(this);
     const pending = new Neros("pendingTodos");
 
     let todos = this.state.project.pending.map(
