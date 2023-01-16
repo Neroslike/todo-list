@@ -6,6 +6,7 @@ import TaskComponent from "./modules/components/TaskComponent";
 import TodoComponent from "./modules/components/TodoComponent";
 import ProjectComponent from "./modules/components/ProjectComponent";
 import Project from "./modules/project";
+import helper from "./modules/helper";
 
 //Initialize modules
 const project = new Project("Big project");
@@ -17,7 +18,7 @@ let todo1 = new Todo(
   "24-05-2023",
   4,
   "This is a todo made with OOP principles",
-  false
+  true
 );
 
 todo1.createTodo(
@@ -25,7 +26,7 @@ todo1.createTodo(
   "24-05-2023",
   2,
   "This is a todo made with OOP principles 1",
-  false
+  true
 );
 
 todo1.createTodo(
@@ -33,7 +34,7 @@ todo1.createTodo(
   "24-05-2023",
   5,
   "This is a todo made with OOP principles 2",
-  false
+  true
 );
 
 const project2 = new Project("Second big project");

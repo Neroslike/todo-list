@@ -5,6 +5,14 @@ import deleteTask from "../../assets/delete.svg";
 import edit from "../../assets/edit.svg";
 import checked from "../../assets/checked.svg";
 import unchecked from "../../assets/unchecked.svg";
+import Project from "../project";
+
+// 1.- If a big todo is checked, its children are also checked ✔️
+// 2.- If all the subtodos are checked, the parent is also checked ✔️
+// 3.- If a big todo and its children are checked, but one of the children
+// is unchecked, the parent todo will also be unchecked ✔️
+// 4.- If a big todo and its children are checked, but the parent is unchecked,
+// all its children will also be unchecked ✔️
 
 class TaskComponent extends Component {
   constructor(name, state) {
@@ -85,36 +93,56 @@ class TaskComponent extends Component {
     element.append(deleteBtn);
     this.state.todo.domElement = element;
     return element;
-    // this.miniEventListeners(element);
-  }
-
-  check(element) {
-    if (!element.classList.contains("completedTask")) {
-      let checkBtn = element.querySelector(".checkButtonMini");
-      checkBtn.click();
-    }
   }
 
   checkChildren() {
-    this.state.todo.children.forEach((element) => {
-      this.check(element.domElement);
+    this.state.todo.children.forEach((subtask) => {
+      subtask.checkTodo();
+    });
+  }
+
+  uncheckChildren() {
+    this.state.todo.children.forEach((subtask) => {
+      subtask.uncheckTodo();
     });
   }
 
   checkParent() {
-    let element = this.state.todo.parent;
-    this.check(element.domElement);
+    let parent = this.state.todo.parent;
+    parent.checkTodo();
+  }
+
+  uncheckParent() {
+    let parent = this.state.todo.parent;
+    parent.uncheckTodo();
+  }
+
+  //Check if the subtasks array contains only completed tasks
+  areSubtasksCompleted() {
+    if (this.state.todo.isSubtask()) {
+      let subtasks = this.state.todo.parent.children;
+      return subtasks.every((subtask) => subtask.check);
+    }
+    return false;
   }
 
   eventHandler = () => {
     return {
-      checkButton: (e) => {
-        let img = e.currentTarget.firstElementChild;
-        console.log(this.state);
+      checkButton: () => {
         if (this.state.todo.check) {
-          this.state.todo.toggleCheck(e.currentTarget.parentElement, img);
+          // If the big todo is completed and a subtask is unchecked, the big
+          // todo is unchecked
+          if (this.areSubtasksCompleted() && this.state.todo.isSubtask())
+            this.uncheckParent();
+          this.state.todo.uncheckTodo();
+          // If the big todo is unchecked, mark all its children unchecked
+          if (this.state.todo.children) this.uncheckChildren();
         } else {
-          this.state.todo.toggleCheck(e.currentTarget.parentElement, img);
+          this.state.todo.checkTodo();
+          // If all the substasks are completed, mark checked the big todo
+          if (this.areSubtasksCompleted() && this.state.todo.isSubtask())
+            this.checkParent();
+          // If the big todo is checked, mark all its children checked
           if (this.state.todo.children) this.checkChildren();
         }
       },

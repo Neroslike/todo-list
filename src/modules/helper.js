@@ -4,8 +4,10 @@ import Todo from "./todo";
 const helper = (() => {
   // This method finds the element matching the ID on the given array and deletes it by index
   const deleteItem = (array, id) => {
-    let found = array.findIndex((item) => item.id === id);
-    found === 0 ? array.shift() : array.splice(found, found);
+    let found = findTask(array, id);
+    let foundIndex = array.indexOf(found);
+    foundIndex === 0 ? array.shift() : array.splice(foundIndex, foundIndex);
+    return found;
   };
 
   // Given an array of todos and an id, this method will recursively find the todo

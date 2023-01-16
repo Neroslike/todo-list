@@ -60,18 +60,37 @@ class Todo {
     return this.#parent;
   }
 
-  toggleCheck(element, img) {
+  toggleCheck() {
     if (this.#isChecked) {
-      this.#isChecked = false;
-      element.classList.remove("completedTask");
-      img.src = unchecked;
-      if (this.#parent === null) TodoComponent.moveToPending(element);
+      this.uncheckTodo();
     } else {
-      this.#isChecked = true;
-      element.classList.add("completedTask");
-      img.src = checked;
-      // If the todo is a parent check all it's children
-      if (this.#parent === null) TodoComponent.moveToCompleted(element);
+      this.checkTodo();
+    }
+  }
+
+  uncheckTodo() {
+    let element = this.domElement;
+    let img =
+      this.domElement.querySelector(".checkButtonMini").firstElementChild;
+    this.#isChecked = false;
+    element.classList.remove("completedTask");
+    img.src = unchecked;
+    if (this.#parent === null) {
+      TodoComponent.moveToPending(element);
+      this.project.resumeTodo(this.id);
+    }
+  }
+
+  checkTodo() {
+    let element = this.domElement;
+    let img =
+      this.domElement.querySelector(".checkButtonMini").firstElementChild;
+    this.#isChecked = true;
+    element.classList.add("completedTask");
+    img.src = checked;
+    if (this.#parent === null) {
+      TodoComponent.moveToCompleted(element);
+      this.project.completeTodo(this.id);
     }
   }
 

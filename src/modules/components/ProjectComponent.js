@@ -38,7 +38,7 @@ class ProjectComponent extends Component {
     return super.DOMelement("click", (e) => {
       this.handleID(e.currentTarget);
       // Reset the board before displaying this project todos
-      // ProjectComponent.resetView();
+      ProjectComponent.resetView();
       this.displayTodos("pending", this.state.project.pending);
       this.displayTodos("completed", this.state.project.completed);
     });
