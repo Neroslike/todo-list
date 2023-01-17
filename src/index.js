@@ -7,6 +7,7 @@ import TodoComponent from "./modules/components/TodoComponent";
 import ProjectComponent from "./modules/components/ProjectComponent";
 import Project from "./modules/project";
 import helper from "./modules/helper";
+import DOMNew from "./modules/components/new";
 
 //Initialize modules
 const project = new Project("Big project");
@@ -68,6 +69,8 @@ let projectComponent = new ProjectComponent("bigtodo", { project: project });
 let project2Component = new ProjectComponent("secondbigtodo", {
   project: project2,
 });
+
+let modal = new Neros("modalContainer");
 
 // Project.selected = null;
 

@@ -2,8 +2,6 @@ import DOMHandler from "../DOMHandler";
 import Priority from "../priority";
 import close from "../../assets/close.svg";
 import Todo from "../todo";
-import DOMTodo from "./todo";
-import DOMModal from "./modal";
 
 const DOMNew = (() => {
   let modal = document.querySelector("#modalContainer");
@@ -49,7 +47,7 @@ const DOMNew = (() => {
       let todo = createTodoObject(form, parent);
       let todoElement = DOMTodo.createTask(todo, true);
       todoContainer.insertBefore(todoElement, todoContainer.lastChild);
-      DOMModal.hideModal();
+      // DOMModal.hideModal();
     });
   };
 

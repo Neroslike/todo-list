@@ -1,5 +1,4 @@
 import DOMNew from "./new";
-import DOMModal from "./modal";
 import Todo from "../todo";
 import Project from "../project";
 
