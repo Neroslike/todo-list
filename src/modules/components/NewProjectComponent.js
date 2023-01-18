@@ -2,6 +2,7 @@ import Component from "../Component";
 import Project from "../project";
 import modal from "../modal";
 import Neros from "../Neros";
+import ProjectComponent from "./ProjectComponent";
 
 export class NewProjectComponent extends Component {
   constructor(name) {
@@ -33,18 +34,12 @@ export class NewProjectComponent extends Component {
     return element;
   }
 
-  // This method selects the last project created
-  selectLastProject() {
-    let project = document.querySelectorAll(".projectContainer");
-    project[project.length - 1].click();
-  }
-
   createProject(form) {
     let title = form.Title.value;
     let project = new Project(title);
     Neros.projects.registerComponent(project.component);
     // Select newly created project
-    this.selectLastProject();
+    ProjectComponent.selectLastProject();
     modal.hide();
   }
 }

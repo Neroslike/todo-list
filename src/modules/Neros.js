@@ -1,3 +1,5 @@
+import ProjectComponent from "./components/ProjectComponent";
+
 class Neros {
   constructor(selector) {
     this.components = {};
@@ -5,6 +7,13 @@ class Neros {
   }
 
   static projects = new Neros("projects");
+
+  static deleteComponent(neros, component) {
+    let components = neros.components;
+    delete components[component.name];
+    neros.updateView();
+    ProjectComponent.selectLastProject();
+  }
 
   registerComponent(component) {
     this.components[component.name] = component;

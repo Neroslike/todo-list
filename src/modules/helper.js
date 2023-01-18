@@ -1,6 +1,7 @@
 import { el } from "date-fns/locale";
 import Project from "./project";
 import ProjectComponent from "./components/ProjectComponent";
+import Neros from "./Neros";
 
 const helper = (() => {
   // This method finds the element matching the ID on the given array and deletes it by index
@@ -32,6 +33,12 @@ const helper = (() => {
     project.clearCompletedTodos();
     projectComponent.displayTodos("completed", project.completed);
     projectComponent.displayTodos("pending", project.pending);
+  });
+
+  // Add event listener to 'Delete this project' button
+  let deleteProjectBtn = document.querySelector("#deleteProject");
+  deleteProjectBtn.addEventListener("click", () => {
+    Neros.deleteComponent(Neros.projects, Project.selected.component);
   });
 
   return { deleteItem, findTask };

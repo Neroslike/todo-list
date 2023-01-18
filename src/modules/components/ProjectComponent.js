@@ -16,6 +16,12 @@ class ProjectComponent extends Component {
     completed.innerHTML = "";
   }
 
+  // This method selects the last project created
+  static selectLastProject() {
+    let project = document.querySelectorAll(".projectContainer");
+    project[project.length - 1].click();
+  }
+
   template = (state) =>
     `
     <div class="projectContainer">
