@@ -1,6 +1,9 @@
 import Component from "../Component";
 import Neros from "../Neros";
 import TaskComponent from "./TaskComponent";
+import { NewTodoComponent } from "./NewTodoComponent";
+import modal from "../modal";
+import { add } from "date-fns";
 
 class TodoComponent extends Component {
   static moveToCompleted(element) {
@@ -44,15 +47,31 @@ class TodoComponent extends Component {
     );
   }
 
+  // This method takes the button element and adds the event listener to create a subtask
+  addSubtask(button) {
+    button.addEventListener("click", () => {
+      this.showModal(this.state.task);
+    });
+  }
+
   DOMelement() {
     let element = super.DOMelement();
     let subtask = element.querySelector(".subtasksContainer");
+    let button = element.querySelector(".");
 
     element.prepend(this.state.task);
     this.state.subtasks.forEach((task) => {
       subtask.append(task);
     });
     return element;
+  }
+
+  showModal(parent = null) {
+    let modal = new Neros("modalContainer");
+    let newTodo = new NewTodoComponent("newTodo", { parent: parent });
+
+    modal.registerComponent(newTodo);
+    modal.show();
   }
 }
 

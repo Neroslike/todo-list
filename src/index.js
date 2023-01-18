@@ -6,6 +6,7 @@ import TaskComponent from "./modules/components/TaskComponent";
 import TodoComponent from "./modules/components/TodoComponent";
 import ProjectComponent from "./modules/components/ProjectComponent";
 import Project from "./modules/project";
+import { NewTodoComponent } from "./modules/components/NewTodoComponent";
 import helper from "./modules/helper";
 import DOMNew from "./modules/components/new";
 
@@ -70,13 +71,10 @@ let project2Component = new ProjectComponent("secondbigtodo", {
   project: project2,
 });
 
-let modal = new Neros("modalContainer");
-
 // Project.selected = null;
 
 projectModule.registerComponent(projectComponent);
 projectModule.registerComponent(project2Component);
-
 // priorities.registerComponent(TestComponent);
 // let a = new TextComponent("text", {
 //   name: "Domestic animals",

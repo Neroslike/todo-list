@@ -10,6 +10,7 @@ class Project {
 
   constructor(name) {
     this.name = name;
+    this.component;
     this.#pendingTasks = [];
     this.#completedTasks = [];
   }
