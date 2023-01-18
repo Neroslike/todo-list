@@ -23,7 +23,7 @@ const modal = (() => {
   // Show modal with new todo form when the 'add new todo' button is clicked
   addTodoBtn.addEventListener("click", () => {
     let modal = new Neros("modalContainer");
-    let newTodo = new NewTodoComponent("newTodo");
+    let newTodo = new NewTodoComponent("newTodo", { parent: null });
 
     modal.registerComponent(newTodo);
     show();

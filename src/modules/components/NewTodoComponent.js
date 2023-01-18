@@ -62,7 +62,11 @@ export class NewTodoComponent extends Component {
     let priority = form.Priority.selectedIndex + 1;
     let description = form.Description.value;
 
-    new Todo(title, date, priority, description, false, state.parent);
+    if (this.state.parent) {
+      this.state.parent.createTodo(title, date, priority, description, false);
+    } else {
+      new Todo(title, date, priority, description, false);
+    }
     this.update();
     modal.hide();
   }
