@@ -5,7 +5,6 @@ import DOMTodo from "./todo";
 import Todo from "../todo";
 import close from "../../assets/close.svg";
 import Priority from "../priority";
-import DOMModal from "./modal";
 
 const DOMView = (() => {
   let modal = document.querySelector("#modalContainer");
@@ -131,7 +130,7 @@ const DOMView = (() => {
   const renderInfo = (todo) => {
     let todoInfo = _createInfo(todo);
     modal.append(todoInfo);
-    DOMModal.showModal();
+    // DOMModal.showModal();
   };
 
   return { renderInfo };

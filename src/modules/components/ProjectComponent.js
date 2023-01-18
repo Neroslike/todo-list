@@ -3,6 +3,11 @@ import Neros from "../Neros";
 import TodoComponent from "./TodoComponent";
 
 class ProjectComponent extends Component {
+  constructor(name, state) {
+    super(name, state);
+    state.project.component = this;
+  }
+
   static resetView() {
     let pending = document.querySelector("#pendingTodos");
     let completed = document.querySelector("#completedTodos");
@@ -44,6 +49,7 @@ class ProjectComponent extends Component {
     });
   }
 
+  // This method removes the id from the previous element and assigns it to the clicked element
   handleID(target) {
     let selected = document.querySelector("#selectedProject");
     if (selected) selected.id = "";
