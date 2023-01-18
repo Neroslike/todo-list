@@ -40,6 +40,10 @@ class Project {
     let task = helper.deleteItem(this.#completedTasks, id);
     this.addPending(task);
   }
+
+  clearCompletedTodos() {
+    this.#completedTasks = [];
+  }
 }
 
 export default Project;

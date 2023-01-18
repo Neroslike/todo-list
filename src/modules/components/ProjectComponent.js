@@ -1,5 +1,6 @@
 import Component from "../Component";
 import Neros from "../Neros";
+import Project from "../project";
 import TodoComponent from "./TodoComponent";
 
 class ProjectComponent extends Component {
@@ -42,6 +43,7 @@ class ProjectComponent extends Component {
   DOMelement() {
     return super.DOMelement("click", (e) => {
       this.handleID(e.currentTarget);
+      Project.selected = this.state.project;
       // Reset the board before displaying this project todos
       ProjectComponent.resetView();
       this.displayTodos("pending", this.state.project.pending);

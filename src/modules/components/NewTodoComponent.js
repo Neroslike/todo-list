@@ -1,7 +1,6 @@
 import Component from "../Component";
 import Todo from "../todo";
 import Project from "../project";
-import ProjectComponent from "./ProjectComponent";
 import Neros from "../Neros";
 import modal from "../modal";
 
