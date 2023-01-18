@@ -2,6 +2,7 @@
    2.- Sort the pending tasks array by priority, and sort the children array by priority as well */
 
 import helper from "./helper";
+import ProjectComponent from "./components/ProjectComponent";
 class Project {
   #pendingTasks;
   #completedTasks;
@@ -10,7 +11,7 @@ class Project {
 
   constructor(name) {
     this.name = name;
-    this.component;
+    this.component = new ProjectComponent(name, { project: this });
     this.#pendingTasks = [];
     this.#completedTasks = [];
   }

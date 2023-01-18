@@ -4,6 +4,8 @@ class Neros {
     this.NerosElement = document.querySelector(`#${selector}`);
   }
 
+  static projects = new Neros("projects");
+
   registerComponent(component) {
     this.components[component.name] = component;
     this.updateView();

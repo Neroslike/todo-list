@@ -13,7 +13,7 @@ import DOMNew from "./modules/components/new";
 //Initialize modules
 const project = new Project("Big project");
 Project.selected = project;
-const projectModule = new Neros("projects");
+const projectModule = Neros.projects;
 
 let todo1 = new Todo(
   "First OOP todo",
@@ -66,15 +66,13 @@ todo2.createTodo(
   false
 );
 
-let projectComponent = new ProjectComponent("bigtodo", { project: project });
-let project2Component = new ProjectComponent("secondbigtodo", {
-  project: project2,
-});
-
 // Project.selected = null;
 
-projectModule.registerComponent(projectComponent);
-projectModule.registerComponent(project2Component);
+projectModule.registerComponent(project.component);
+projectModule.registerComponent(project2.component);
+
+let firstProject = document.querySelector(".projectContainer");
+firstProject.click();
 // priorities.registerComponent(TestComponent);
 // let a = new TextComponent("text", {
 //   name: "Domestic animals",

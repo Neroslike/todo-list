@@ -6,7 +6,6 @@ import TodoComponent from "./TodoComponent";
 class ProjectComponent extends Component {
   constructor(name, state) {
     super(name, state);
-    state.project.component = this;
   }
 
   static resetView() {
