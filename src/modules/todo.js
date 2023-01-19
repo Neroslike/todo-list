@@ -78,6 +78,7 @@ class Todo {
     if (this.#parent === null) {
       TodoComponent.moveToPending(element);
       this.project.resumeTodo(this.id);
+      this.project.component.refreshTodos();
     }
   }
 
@@ -91,6 +92,7 @@ class Todo {
     if (this.#parent === null) {
       TodoComponent.moveToCompleted(element);
       this.project.completeTodo(this.id);
+      this.project.component.refreshTodos();
     }
   }
 

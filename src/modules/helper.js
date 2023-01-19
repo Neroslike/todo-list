@@ -22,6 +22,32 @@ const helper = (() => {
     return findTask(queue, id);
   };
 
+  // Merge sort algorithm
+
+  const mergeSort = (array) => {
+    let sortedArray = [];
+    if (array.length < 2) {
+      sortedArray.push(array[0]);
+    } else {
+      let half = Math.floor(array.length / 2);
+      let array1 = mergeSort(array.splice(0, half));
+      let array2 = mergeSort(array);
+      let counter = array1.length + array2.length;
+      for (let index = 0; index < counter; index++) {
+        if (array1.length === 0 || array2.length === 0) {
+          sortedArray = sortedArray.concat(array1.concat(array2));
+          break;
+        }
+        if (array1[0].priority < array2[0].priority) {
+          sortedArray.push(array1.shift());
+        } else {
+          sortedArray.push(array2.shift());
+        }
+      }
+    }
+    return sortedArray;
+  };
+
   // Add event listener to 'clear completed' button, this shouldn't be here but
   // I don't think it's worth creating a new module just for this.
   let clear = document.querySelector("#clearCompleted");
@@ -41,7 +67,7 @@ const helper = (() => {
     Neros.deleteComponent(Neros.projects, Project.selected.component);
   });
 
-  return { deleteItem, findTask };
+  return { deleteItem, findTask, mergeSort };
 })();
 
 export default helper;

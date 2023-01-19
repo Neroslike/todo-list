@@ -20,7 +20,7 @@ let todo1 = new Todo(
   "24-05-2023",
   4,
   "This is a todo made with OOP principles",
-  true
+  false
 );
 
 todo1.createTodo(
@@ -28,7 +28,7 @@ todo1.createTodo(
   "24-05-2023",
   2,
   "This is a todo made with OOP principles 1",
-  true
+  false
 );
 
 todo1.createTodo(
@@ -36,11 +36,11 @@ todo1.createTodo(
   "24-05-2023",
   5,
   "This is a todo made with OOP principles 2",
-  true
+  false
 );
 
 const project2 = new Project("Second big project");
-Project.selected = project2;
+// Project.selected = project2;
 
 let todo2 = new Todo(
   "second OOP todo",
@@ -53,8 +53,16 @@ let todo2 = new Todo(
 todo2.createTodo(
   "first of second OOP todo",
   "24-05-2023",
-  2,
+  4,
   "This is a todo made with OOP principles 1",
+  false
+);
+
+todo2.createTodo(
+  "second of second OOP todo",
+  "24-05-2023",
+  1,
+  "This is a todo made with OOP principles 2",
   false
 );
 
@@ -66,6 +74,21 @@ todo2.createTodo(
   false
 );
 
+todo2.createTodo(
+  "second of second OOP todo",
+  "24-05-2023",
+  2,
+  "This is a todo made with OOP principles 2",
+  false
+);
+
+todo2.createTodo(
+  "second of second OOP todo",
+  "24-05-2023",
+  5,
+  "This is a todo made with OOP principles 2",
+  false
+);
 // Project.selected = null;
 
 projectModule.registerComponent(project.component);

@@ -2,6 +2,7 @@ import Component from "../Component";
 import Neros from "../Neros";
 import Project from "../project";
 import TodoComponent from "./TodoComponent";
+import helper from "../helper";
 
 class ProjectComponent extends Component {
   constructor(name, state) {
@@ -32,17 +33,26 @@ class ProjectComponent extends Component {
   // This method displays all todos belonging to this project
   displayTodos(selector, projectTodos) {
     const element = new Neros(`${selector}Todos`);
+    let todos = helper.mergeSort(projectTodos);
 
-    let todos = projectTodos.map(
+    todos = todos.map(
       (task, index) =>
         new TodoComponent(`todo${index}`, {
           task: task,
-          subtasks: task.children,
+          subtasks: helper.mergeSort(task.children),
         })
     );
     todos.forEach((todo) => {
       element.registerComponent(todo);
     });
+  }
+
+  refreshTodos() {
+    let pendingArray = this.state.project.pending;
+    let completedArray = this.state.project.completed;
+    if (pendingArray.length > 0) this.displayTodos("pending", pendingArray);
+    if (completedArray.length > 0)
+      this.displayTodos("completed", completedArray);
   }
 
   DOMelement() {
@@ -51,8 +61,7 @@ class ProjectComponent extends Component {
       Project.selected = this.state.project;
       // Reset the board before displaying this project todos
       ProjectComponent.resetView();
-      this.displayTodos("pending", this.state.project.pending);
-      this.displayTodos("completed", this.state.project.completed);
+      this.refreshTodos();
     });
   }
 

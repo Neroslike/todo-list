@@ -55,9 +55,6 @@ class TodoComponent extends Component {
     });
   }
 
-  // IMPORTANT
-  // Make the createTodo button from subtask work, it doesnt add the parent
-  // IMPORTANT
   DOMelement() {
     let element = super.DOMelement();
     let subtask = element.querySelector(".subtasksContainer");
