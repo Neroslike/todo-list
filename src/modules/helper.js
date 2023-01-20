@@ -25,6 +25,7 @@ const helper = (() => {
   // Merge sort algorithm
 
   const mergeSort = (array) => {
+    if (array.length < 1) return array;
     let sortedArray = [];
     if (array.length < 2) {
       sortedArray.push(array[0]);

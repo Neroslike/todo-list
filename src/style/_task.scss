@@ -147,3 +147,9 @@ $small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
   margin-top: 0.3vw;
   align-self: flex-start;
 }
+
+#completedTodos > .taskContainer > .subtasksContainer {
+  button {
+    display: none;
+  }
+}
