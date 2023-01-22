@@ -20,7 +20,12 @@ class ProjectComponent extends Component {
   // This method selects the last project created
   static selectLastProject() {
     let project = document.querySelectorAll(".projectContainer");
-    project[project.length - 1].click();
+    if (project.length > 0) {
+      project[project.length - 1].click();
+    } else {
+      Project.selected = null;
+      ProjectComponent.resetView();
+    }
   }
 
   template = (state) =>

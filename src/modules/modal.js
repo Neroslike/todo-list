@@ -1,7 +1,7 @@
 import Neros from "./Neros";
 import { NewTodoComponent } from "./components/NewTodoComponent";
 import { NewProjectComponent } from "./components/NewProjectComponent";
-import ProjectComponent from "./components/ProjectComponent";
+import Project from "./project";
 
 const modal = (() => {
   let modalElement = document.querySelector("#modal");
@@ -33,9 +33,10 @@ const modal = (() => {
   addTodoBtn.addEventListener("click", () => {
     let modal = new Neros("modalContainer");
     let newTodo = new NewTodoComponent("newTodo", { parent: null });
-
-    modal.registerComponent(newTodo);
-    show();
+    if (Project.selected !== null) {
+      modal.registerComponent(newTodo);
+      show();
+    }
   });
 
   // Add event listener to 'Add new project' button
