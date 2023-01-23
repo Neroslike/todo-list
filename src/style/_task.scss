@@ -1,0 +1,155 @@
+$big-responsive-text-size: clamp(8px, calc(0.5rem + 0.7vw), 64px);
+$big-responsive-button-size: clamp(14px, calc(0.5rem + 0.7vw), 64px);
+$small-responsive-text-size: clamp(6px, calc(0.5rem + 0.4vw), 36px);
+$small-responsive-button-size: clamp(10px, calc(0.5rem + 0.4vw), 36px);
+.TodosContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 50px;
+  overflow-y: scroll;
+}
+
+.taskContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: clamp(4px, 0.4vw, 8px);
+}
+
+.task {
+  display: flex;
+  background-color: #212529;
+  width: 100%;
+  min-width: max-content;
+  border-radius: 14px;
+  overflow: hidden;
+  border-top: 2px solid #a0b1c3;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  margin: clamp(2px, 0.3vw, 8px) 0;
+}
+
+.taskMiniContainer {
+  background-color: #495057;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(8px, calc(0.5rem + 0.5vw), 64px);
+  cursor: pointer;
+  user-select: none;
+}
+
+.taskColor {
+  height: $big-responsive-button-size;
+  width: $big-responsive-button-size;
+  background-color: #e81616;
+  border-radius: 50%;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.taskButton {
+  height: $big-responsive-button-size;
+  width: $big-responsive-button-size;
+}
+
+.taskMiniContainer:nth-last-of-type(-n + 2) {
+  outline: 2px solid #6c757d;
+}
+
+.taskMiniContainer:nth-child(-n + 2) {
+  outline: 2px solid #6c757d;
+}
+
+.taskTime {
+  padding-left: calc(1rem + 1vw);
+  padding-right: 10px;
+
+  p {
+    white-space: nowrap;
+    color: #adb5bd;
+  }
+}
+
+.taskTitle {
+  margin-right: auto;
+  flex: 1;
+  padding-left: 10px;
+  width: clamp(150px, calc(10vw + 10rem), 500px);
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.taskTitle,
+.taskTime {
+  justify-self: center;
+  align-self: center;
+  p {
+    font-size: $big-responsive-text-size;
+    margin: 0;
+  }
+}
+
+.subtasksContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: flex-end;
+  width: 90%;
+}
+
+.subtask {
+  margin: clamp(2px, 0.1vw, 4px) 0;
+  // justify-content: center;
+
+  .taskMiniContainer {
+    padding: clamp(8px, calc(0.4rem + 0.4vw), 48px);
+
+    .taskButton {
+      height: $small-responsive-button-size;
+      width: $small-responsive-button-size;
+    }
+
+    .taskColor {
+      width: $small-responsive-button-size;
+      height: $small-responsive-button-size;
+    }
+  }
+
+  .taskTitle,
+  .taskTime {
+    p {
+      font-size: $small-responsive-text-size;
+    }
+  }
+}
+
+.completedTask {
+  text-decoration: line-through;
+  opacity: 0.6;
+  border: none;
+  box-shadow: 0px 2px 0px rgba(255, 255, 255, 0.15), inset 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.taskDataContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1 2;
+  cursor: pointer;
+}
+
+.addSubtask {
+  margin-top: 0.3vw;
+  align-self: flex-start;
+}
+
+#completedTodos > .taskContainer > .subtasksContainer {
+  button {
+    display: none;
+  }
+}

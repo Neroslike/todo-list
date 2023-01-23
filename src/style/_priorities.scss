@@ -1,0 +1,64 @@
+$responsive-text-size: clamp(8px, 1vw, 64px);
+$responsive-button-size: clamp(14px, calc(0.5rem + 0.7vw), 64px);
+$responsive-prio-size: clamp(14px, calc(0.5rem + 0.4vw), 64px);
+
+.priorityName {
+  padding-left: 10px;
+  font-size: $responsive-text-size;
+  margin: 0;
+  font-weight: 300;
+  align-self: center;
+  justify-self: center;
+}
+
+.priorityColorContainer {
+  background-color: #495057;
+  padding: clamp(8px, calc(0.3rem + 0.3vw), 64px);
+  outline: 2px solid #6c757d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.priorityColor {
+  border-radius: 50%;
+  height: $responsive-button-size;
+  width: $responsive-button-size;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.priority {
+  background-color: #212529;
+  border-top: 2px solid #a0b1c3;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+#priorities {
+  width: clamp(100px, calc(30% + 4vw), 600px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 0.3vw, 12px);
+  margin-bottom: clamp(10px, 0.7vw, 16px);
+}
+
+.priorityColorContainer {
+  .priorityColor {
+    height: $responsive-prio-size;
+    width: $responsive-prio-size;
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.sidebarButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vw;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+    </style>
+    <script
+      src="https://kit.fontawesome.com/9384a12df6.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <div id="modal" class="modal hidden">
+      <div id="modalContainer">
+        <img src="../src/assets/close.svg" alt="" class="closeButton" />
+      </div>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <h1>Priorities</h1>
+        <div id="priorities"> </div>
+        <div class="sidebarButtons">
+          <button id="addBigTodo"
+            ><i class="fa-solid fa-plus"></i>Add new todo</button
+          >
+          <button id="clearCompleted" class="deleteButton"
+            ><i class="fa-solid fa-ban"></i>Clear completed</button
+          >
+        </div>
+        <h1>Projects</h1>
+        <div id="projects"> </div>
+        <div class="sidebarButtons">
+          <button id="addProject"
+            ><i class="fa-solid fa-list-check"></i>Add new Project</button
+          >
+          <button id="deleteProject"
+            ><i class="fa-solid fa-trash"></i>Delete this Project</button
+          >
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="mainContent">
+        <div class="pending">
+          <h1>Pending Tasks</h1>
+          <div id="pendingTodos" class="TodosContainer"> </div>
+        </div>
+        <div class="separator"></div>
+        <div class="completed">
+          <h1>Completed Tasks</h1>
+          <div id="completedTodos" class="TodosContainer"> </div>
+        </div>
+      </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>

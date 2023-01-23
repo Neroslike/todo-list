@@ -1,0 +1,58 @@
+@import "./index";
+
+html {
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #f8f9fa;
+}
+
+body {
+  background: linear-gradient(119.75deg, #6e9ecf 13.02%, #12263a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  // font-size: calc(1rem + 1vw);
+  font-size: 1.5vw;
+  padding: 0;
+  margin: 0.7vw 0;
+  user-select: none;
+}
+
+.projectTitle {
+  font-size: 1vw;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  background: #2887c8;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2), inset 0px 2px 0px #6bb2e3;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  color: #f8f9fa;
+  padding: 6px 10px;
+  font-size: 1.1vw;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background: hsl(0, 82%, 63%);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2), inset 0px 2px 0px hsl(0, 67%, 77%);
+}
+
+.editButton {
+  background: rgb(111, 184, 55);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2), inset 0px 2px 0px rgb(188, 229, 156);
+}

@@ -1,0 +1,29 @@
+#projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5vw;
+  width: 100%;
+}
+
+.projectContainer {
+  background-color: hsla(200, 7%, 8%, 60%);
+  width: 100%;
+  padding: 0.5vw 0 0.5vw 0.7vw;
+  cursor: pointer;
+  transition: background-color 0.2s ease-out 0s;
+}
+
+.projectContainer:hover {
+  background-color: hsla(200, 7%, 8%, 100%);
+}
+
+#selectedProject {
+  background-color: hsla(200, 7%, 8%, 100%);
+}
+
+button {
+  i {
+    margin-right: 0.5vw;
+  }
+}

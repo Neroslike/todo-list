@@ -1,0 +1,47 @@
+.modal {
+  background-color: hsla(0, 0%, 0%, 0.502);
+  backdrop-filter: blur(3px);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalContainer {
+  background-color: #343a40;
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid gray;
+  border-radius: 12px;
+  position: relative;
+  height: max-content;
+  max-height: 70vh;
+  width: max-content;
+  overflow-y: scroll;
+}
+
+.closeButton {
+  position: sticky;
+  top: 1vw;
+  left: 1vw;
+  height: 1.3vw;
+  width: 1.3vw;
+  z-index: 1;
+}
+
+.closeButton:hover {
+  cursor: pointer;
+}
+
+hr {
+  background-color: gray;
+  height: 1px;
+  border: none;
+}
