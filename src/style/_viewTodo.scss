@@ -22,6 +22,14 @@
   display: grid;
   min-width: clamp(250px, 70vh, 1000px);
   grid-template-rows: 1fr auto max-content auto max-content;
+
+  .separator {
+    height: 1px;
+  }
+
+  hr {
+    width: 90%;
+  }
 }
 
 .dateViewContainer {
@@ -62,13 +70,12 @@ h3 {
 }
 
 .mainTaskContainer {
-  border-bottom: #15181c 2px solid;
   padding: 0 1vw 1vw 1vw;
+  border-bottom: #15181c 2px solid;
 }
 
 .viewSubContainer {
   border-top: #464e55 2px solid;
-  border-bottom: #15181c 2px solid;
   padding: 1vw;
   display: flex;
   flex-direction: column;
