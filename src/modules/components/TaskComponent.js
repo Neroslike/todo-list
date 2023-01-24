@@ -160,7 +160,6 @@ class TaskComponent extends Component {
         let component = new viewTodoComponent("taskView", {
           todo: this.state.todo,
         });
-        console.log(component);
         modal.show(component);
       },
       editButton: () => {

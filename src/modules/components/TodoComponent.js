@@ -69,11 +69,8 @@ class TodoComponent extends Component {
   }
 
   showModal(parent) {
-    let modalElement = new Neros("modalContainer");
     let newTodo = new NewTodoComponent("newTodo", { parent: parent });
-
-    modalElement.registerComponent(newTodo);
-    modal.show();
+    modal.show(newTodo);
   }
 }
 
