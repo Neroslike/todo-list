@@ -1,11 +1,12 @@
 import Component from "../Component";
 import MiniContainerComponent from "./MiniContainerComponent";
 import Priority from "../priority";
+import { viewTodoComponent } from "./viewTodoComponent";
+import modal from "../modal";
 import deleteTask from "../../assets/delete.svg";
 import edit from "../../assets/edit.svg";
 import checked from "../../assets/checked.svg";
 import unchecked from "../../assets/unchecked.svg";
-import Project from "../project";
 
 // 1.- If a big todo is checked, its children are also checked ✔️
 // 2.- If all the subtodos are checked, the parent is also checked ✔️
@@ -70,6 +71,7 @@ class TaskComponent extends Component {
 
   DOMelement() {
     let element = super.DOMelement();
+    this.viewEventListener(element);
     let check = this.checkMini().DOMelement(
       "click",
       this.eventHandler().checkButton
@@ -93,6 +95,11 @@ class TaskComponent extends Component {
     element.append(deleteBtn);
     this.state.todo.domElement = element;
     return element;
+  }
+
+  viewEventListener(element) {
+    let innerContainer = element.querySelector(".taskDataContainer");
+    innerContainer.addEventListener("click", this.eventHandler().viewButton);
   }
 
   checkChildren() {
@@ -148,6 +155,13 @@ class TaskComponent extends Component {
       },
       priorityButton: () => {
         console.log("The priority button was pressed", this.state);
+      },
+      viewButton: () => {
+        let component = new viewTodoComponent("taskView", {
+          todo: this.state.todo,
+        });
+        console.log(component);
+        modal.show(component);
       },
       editButton: () => {
         console.log("The edit button was pressed", this.state);

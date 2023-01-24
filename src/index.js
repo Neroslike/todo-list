@@ -8,7 +8,6 @@ import ProjectComponent from "./modules/components/ProjectComponent";
 import Project from "./modules/project";
 import { NewTodoComponent } from "./modules/components/NewTodoComponent";
 import helper from "./modules/helper";
-import DOMNew from "./modules/components/new";
 
 //Initialize modules
 const project = new Project("Big project");

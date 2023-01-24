@@ -14,7 +14,9 @@ const modal = (() => {
     resetModal();
   };
 
-  const show = () => {
+  const show = (component) => {
+    let modal = new Neros("modalContainer");
+    modal.registerComponent(component);
     modalElement.classList.remove("hidden");
   };
 
@@ -31,23 +33,21 @@ const modal = (() => {
 
   // Show modal with new todo form when the 'add new todo' button is clicked
   addTodoBtn.addEventListener("click", () => {
-    let modal = new Neros("modalContainer");
     let newTodo = new NewTodoComponent("newTodo", { parent: null });
     if (Project.selected !== null) {
-      modal.registerComponent(newTodo);
-      show();
+      show(newTodo);
     }
   });
 
   // Add event listener to 'Add new project' button
 
   addProjectBtn.addEventListener("click", () => {
-    let modal = new Neros("modalContainer");
     let newProject = new NewProjectComponent("newProject");
 
-    modal.registerComponent(newProject);
-    show();
+    show(newProject);
   });
+
+  // Add view event listener to tasks
 
   return {
     hide,
