@@ -3,6 +3,7 @@ import MiniContainerComponent from "./MiniContainerComponent";
 import Priority from "../priority";
 import { viewTodoComponent } from "./viewTodoComponent";
 import modal from "../modal";
+import { NewTodoComponent } from "./NewTodoComponent";
 import deleteTask from "../../assets/delete.svg";
 import edit from "../../assets/edit.svg";
 import checked from "../../assets/checked.svg";
@@ -163,7 +164,10 @@ class TaskComponent extends Component {
         modal.show(component);
       },
       editButton: () => {
-        console.log("The edit button was pressed", this.state);
+        let component = new NewTodoComponent("taskEdit", {
+          todo: this.state.todo,
+        });
+        modal.show(component);
       },
       deleteButton: () => {
         console.log("The delete button was pressed", this.state);

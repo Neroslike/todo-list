@@ -12,27 +12,35 @@ export class NewTodoComponent extends Component {
       <form class='newForm'>
         <div class='field TitleField'>
           <label for='Title'>Title</label>
-          <input type='text' name='Title' id='Title'>
+          <input type='text' name='Title' id='Title' value="${
+            state.todo ? state.todo.title : ""
+          }">
         </div>
         <div class='field DuedateField'>
           <label for='Due date'>Due date</label>
-          <input type='date' name='Duedate' id='Due date'>
+          <input type='date' name='Duedate' id='Due date' value="${
+            state.todo ? state.todo.date : ""
+          }">
         </div>
         <div class='field PriorityField'>
           <label for='Priority'>Priority</label>
           <select name="Priority" id="Priority">
-            <option value="Urgent">Urgent</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-            <option value="Optional">Optional</option>
+            <option id='p1' value="Urgent">Urgent</option>
+            <option id='p2' value="High">High</option>
+            <option id='p3' value="Medium">Medium</option>
+            <option id='p4' value="Low">Low</option>
+            <option id='p5' value="Optional">Optional</option>
           </select>
         </div>
         <div class='field DescriptionField'>
           <label for='Description'>Description</label>
-          <input type='text' name='Description' id='Description'>
+          <input type='text' name='Description' id='Description' value="${
+            state.todo ? state.todo.description : ""
+          }">
         </div>
-        <button class='createButton' type='button'>Create</button>
+        <button class='createButton' type='button'>${
+          this.state.todo ? "Edit" : "Create"
+        }</button>
       </form>
     </div>
     `;
@@ -41,9 +49,18 @@ export class NewTodoComponent extends Component {
     let element = super.DOMelement();
     let button = element.querySelector("button");
     let form = element.querySelector("form");
-    button.addEventListener("click", () => {
-      this.createTodo(form);
-    });
+    // If the todo already exists (edit mode) make the button edit the todo, else just create a new task
+    if (this.state.todo) {
+      let select = element.querySelector(`#Priority`);
+      select.selectedIndex = this.state.todo.priority - 1;
+      button.addEventListener("click", () => {
+        this.editTodo(form);
+      });
+    } else {
+      button.addEventListener("click", () => {
+        this.createTodo(form);
+      });
+    }
     return element;
   }
 
@@ -53,6 +70,16 @@ export class NewTodoComponent extends Component {
 
     projectComponent.displayTodos("pending", project.pending);
     projectComponent.displayTodos("completed", project.completed);
+  }
+
+  editTodo(form) {
+    let title = form.Title.value;
+    let date = form.Duedate.value;
+    let priority = form.Priority.selectedIndex + 1;
+    let description = form.Description.value;
+    this.state.todo.edit(title, date, priority, description);
+    this.update();
+    modal.hide();
   }
 
   createTodo(form) {

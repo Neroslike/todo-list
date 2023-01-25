@@ -47,6 +47,13 @@ class Todo {
     return a;
   }
 
+  edit(title, date, priority, description) {
+    this.title = title;
+    this.date = date;
+    this.priority = priority;
+    this.description = description;
+  }
+
   get id() {
     return this.#id;
   }
