@@ -45,6 +45,8 @@ export class viewTodoComponent extends Component {
           todo: task,
           classes: ["task", "subtask"],
         }).DOMelement();
+        taskDOM.firstChild.remove();
+        // Remove the check minicontainer so users wont be able to check the todo from the modal
         subtaskContainer.append(taskDOM);
       });
     } else {
@@ -52,6 +54,8 @@ export class viewTodoComponent extends Component {
         todo: this.state.todo.parent,
         classes: ["task subtask"],
       }).DOMelement();
+      parentDOM.firstChild.remove();
+      // Remove the check minicontainer so users wont be able to check the todo from the modal
       subtaskContainer.append(parentDOM);
     }
     return element;
