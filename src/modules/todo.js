@@ -103,6 +103,21 @@ class Todo {
     }
   }
 
+  deleteTodo(task) {
+    if (this.isSubtask()) {
+      this.parent.delete(task);
+    } else {
+      this.project.deleteTodo(task);
+    }
+  }
+
+  delete(task) {
+    let taskIndex = this.#children.indexOf(task);
+    taskIndex === 0
+      ? this.#children.shift()
+      : this.#children.splice(taskIndex, 1);
+  }
+
   get project() {
     return this.#project;
   }
