@@ -2,12 +2,8 @@
 import "./style/main.scss";
 import Neros from "./modules/Neros";
 import Todo from "./modules/todo";
-import TaskComponent from "./modules/components/TaskComponent";
-import TodoComponent from "./modules/components/TodoComponent";
-import ProjectComponent from "./modules/components/ProjectComponent";
 import Project from "./modules/project";
-import { NewTodoComponent } from "./modules/components/NewTodoComponent";
-import helper from "./modules/helper";
+import { PriorityComponent } from "./modules/components/PriorityComponent";
 
 //Initialize modules
 const project = new Project("Big project");
