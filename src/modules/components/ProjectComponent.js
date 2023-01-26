@@ -3,6 +3,7 @@ import Neros from "../Neros";
 import Project from "../project";
 import TodoComponent from "./TodoComponent";
 import helper from "../helper";
+import Priority from "../priority";
 
 class ProjectComponent extends Component {
   constructor(name, state) {
@@ -37,6 +38,7 @@ class ProjectComponent extends Component {
 
   // This method displays all todos belonging to this project
   displayTodos(selector, projectTodos) {
+    Priority.setColors();
     const element = new Neros(`${selector}Todos`);
     let todos = helper.mergeSort(projectTodos);
 
