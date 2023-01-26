@@ -32,6 +32,10 @@ class Priority {
   get number() {
     return this.#number;
   }
+
+  set color(color) {
+    this.color = color;
+  }
 }
 
 export default Priority;
