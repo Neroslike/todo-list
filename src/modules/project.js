@@ -45,6 +45,20 @@ class Project {
   clearCompletedTodos() {
     this.#completedTasks = [];
   }
+
+  deleteTodo(task) {
+    if (this.#pendingTasks.includes(task)) {
+      let taskIndex = this.#pendingTasks.indexOf(task);
+      taskIndex === 0
+        ? this.#pendingTasks.shift()
+        : this.#pendingTasks.splice(taskIndex, taskIndex);
+    } else {
+      let taskIndex = this.#completedTasks.indexOf(task);
+      taskIndex === 0
+        ? this.#completedTasks.shift()
+        : this.#completedTasks.splice(taskIndex, taskIndex);
+    }
+  }
 }
 
 export default Project;

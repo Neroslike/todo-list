@@ -8,7 +8,7 @@ class Neros {
 
   static projects = new Neros("projects");
 
-  static deleteComponent(neros, component) {
+  static deleteNerosComponent(neros, component) {
     let components = neros.components;
     delete components[component.name];
     neros.updateView();

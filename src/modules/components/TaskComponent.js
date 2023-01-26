@@ -8,6 +8,7 @@ import deleteTask from "../../assets/delete.svg";
 import edit from "../../assets/edit.svg";
 import checked from "../../assets/checked.svg";
 import unchecked from "../../assets/unchecked.svg";
+import { DeleteComponent } from "./DeleteComponent";
 
 // 1.- If a big todo is checked, its children are also checked ✔️
 // 2.- If all the subtodos are checked, the parent is also checked ✔️
@@ -170,7 +171,10 @@ class TaskComponent extends Component {
         modal.show(component);
       },
       deleteButton: () => {
-        console.log("The delete button was pressed", this.state);
+        let component = new DeleteComponent("delete", {
+          todo: this.state.todo,
+        });
+        modal.show(component);
       },
     };
   };

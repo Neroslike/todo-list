@@ -40,16 +40,25 @@ class ProjectComponent extends Component {
     const element = new Neros(`${selector}Todos`);
     let todos = helper.mergeSort(projectTodos);
 
-    todos = todos.map(
-      (task, index) =>
-        new TodoComponent(`todo${index}`, {
-          task: task,
-          subtasks: helper.mergeSort(task.children),
-        })
-    );
-    todos.forEach((todo) => {
-      element.registerComponent(todo);
-    });
+    if (todos.length > 0) {
+      todos = todos.map(
+        (task, index) =>
+          new TodoComponent(`todo${index}`, {
+            task: task,
+            subtasks: helper.mergeSort(task.children),
+          })
+      );
+      todos.forEach((todo) => {
+        element.registerComponent(todo);
+      });
+    } else {
+      element.updateView();
+    }
+  }
+
+  update() {
+    this.displayTodos("completed", this.state.project.completed);
+    this.displayTodos("pending", this.state.project.pending);
   }
 
   refreshTodos() {

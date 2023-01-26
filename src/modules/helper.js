@@ -8,7 +8,7 @@ const helper = (() => {
   const deleteItem = (array, id) => {
     let found = findTask([...array], id);
     let foundIndex = array.indexOf(found);
-    foundIndex === 0 ? array.shift() : array.splice(foundIndex, foundIndex);
+    foundIndex === 0 ? array.shift() : array.splice(foundIndex, 1);
     return found;
   };
 
@@ -65,7 +65,7 @@ const helper = (() => {
   // Add event listener to 'Delete this project' button
   let deleteProjectBtn = document.querySelector("#deleteProject");
   deleteProjectBtn.addEventListener("click", () => {
-    Neros.deleteComponent(Neros.projects, Project.selected.component);
+    Neros.deleteNerosComponent(Neros.projects, Project.selected.component);
   });
 
   return { deleteItem, findTask, mergeSort };

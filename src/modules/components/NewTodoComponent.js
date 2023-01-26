@@ -64,21 +64,13 @@ export class NewTodoComponent extends Component {
     return element;
   }
 
-  update() {
-    let projectComponent = Project.selected.component;
-    let project = Project.selected;
-
-    projectComponent.displayTodos("pending", project.pending);
-    projectComponent.displayTodos("completed", project.completed);
-  }
-
   editTodo(form) {
     let title = form.Title.value;
     let date = form.Duedate.value;
     let priority = form.Priority.selectedIndex + 1;
     let description = form.Description.value;
     this.state.todo.edit(title, date, priority, description);
-    this.update();
+    Project.selected.component.update();
     modal.hide();
   }
 
@@ -93,7 +85,7 @@ export class NewTodoComponent extends Component {
     } else {
       new Todo(title, date, priority, description, false);
     }
-    this.update();
+    Project.selected.component.update();
     modal.hide();
   }
 }
