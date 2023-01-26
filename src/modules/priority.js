@@ -11,14 +11,6 @@ class Priority {
     new Priority("Optional", 5, "#2336E0"),
   ];
 
-  static setColors() {
-    let containers = document.querySelectorAll(".priorityColorContainer");
-    containers.forEach((container, index) => {
-      container.firstElementChild.style.background =
-        Priority.priorities[index].color;
-    });
-  }
-
   static get priorities() {
     return [...Priority.#prioritiesArray];
   }
