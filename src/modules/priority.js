@@ -11,6 +11,20 @@ class Priority {
     new Priority("Optional", 5, "#2336E0"),
   ];
 
+  static #defaultColours = [
+    "#E81616",
+    "#EF5513",
+    "#F3DD11",
+    "#22C51F",
+    "#2336E0",
+  ];
+
+  static resetColours() {
+    Priority.#prioritiesArray.forEach((priority, index) => {
+      priority.color = Priority.#defaultColours[index];
+    });
+  }
+
   static get priorities() {
     return [...Priority.#prioritiesArray];
   }
