@@ -3,7 +3,7 @@ import Project from "./project";
 import ProjectComponent from "./components/ProjectComponent";
 import Neros from "./Neros";
 import Priority from "./priority";
-import { Storage } from "./storageManagement";
+import { PriorityComponent } from "./components/PriorityComponent";
 
 const helper = (() => {
   // This method finds the element matching the ID on the given array and deletes it by index
@@ -74,7 +74,7 @@ const helper = (() => {
   let resetPrioBtn = document.querySelector("#resetPriorities");
   resetPrioBtn.addEventListener("click", () => {
     Priority.resetColours();
-    Project.selected.component.update();
+    PriorityComponent.displayPriorities();
   });
 
   return { deleteItem, findTask, mergeSort };

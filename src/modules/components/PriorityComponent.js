@@ -2,6 +2,7 @@ import Component from "../Component";
 import Neros from "../Neros";
 import Priority from "../priority";
 import Project from "../project";
+import { Storage } from "../storageManagement";
 
 export class PriorityComponent extends Component {
   template = (state) =>
@@ -24,6 +25,7 @@ export class PriorityComponent extends Component {
     //Change priority color when the color picker changes
     picker.addEventListener("change", (e) => {
       this.state.priority.color = e.target.value;
+      Storage.savePriorityData();
       Project.selected.component.update();
     });
     return element;

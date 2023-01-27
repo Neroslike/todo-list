@@ -1,25 +1,59 @@
+import Priority from "./priority";
 import Project from "./project";
+import { PriorityComponent } from "./components/PriorityComponent";
 
 export const Storage = (() => {
   const saveData = () => {
     window.localStorage.clear();
-    Project.projects.forEach((project, index) => {
-      let projectJSON = project.toJSON();
-      window.localStorage.setItem(`project${index}`, projectJSON);
-    });
-    console.log(Project.fromJSON(window.localStorage.getItem("project0")));
+    _saveProjectData();
+    savePriorityData();
   };
 
-  const loadData = () => {
-    if (!window.localStorage.getItem("project0" === null)) {
-      for (const key in window.localStorage) {
-        if (Object.hasOwnProperty.call(window.localStorage, key)) {
-          let projectObj = Project.fromJSON(window.localStorage[key]);
+  const _saveProjectData = () => {
+    let projects = {};
+    Project.projects.forEach((project, index) => {
+      let projectJSON = project.toJSON();
+      projects[`project${index}`] = projectJSON;
+    });
+    window.localStorage.setItem("projects", JSON.stringify(projects));
+  };
+  const savePriorityData = () => {
+    let priorities = {};
+    Priority.priorities.forEach((priority, index) => {
+      let priorityColor = priority.color;
+      priorities[index] = priorityColor;
+    });
+    window.localStorage.setItem("priorities", JSON.stringify(priorities));
+  };
+
+  const _loadProjectData = () => {
+    if (!window.localStorage.getItem("projects" === null)) {
+      let projects = JSON.parse(window.localStorage.getItem("projects"));
+      for (const key in projects) {
+        if (Object.hasOwnProperty.call(projects, key)) {
+          let projectObj = Project.fromJSON(projects[key]);
           Project.loadProject(projectObj);
         }
       }
       _selectLastProject();
     }
+  };
+
+  const _loadPriorityData = () => {
+    if (!window.localStorage.getItem("priorities" === null)) {
+      let colors = JSON.parse(window.localStorage.getItem("priorities"));
+      for (const key in colors) {
+        if (Object.hasOwnProperty.call(colors, key)) {
+          Priority.priorities[key].color = colors[key];
+        }
+      }
+    }
+    PriorityComponent.displayPriorities();
+  };
+
+  const loadData = () => {
+    _loadPriorityData();
+    _loadProjectData();
   };
 
   const _selectLastProject = () => {
@@ -30,5 +64,5 @@ export const Storage = (() => {
     }
   };
 
-  return { saveData, loadData };
+  return { saveData, loadData, savePriorityData };
 })();
