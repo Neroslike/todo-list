@@ -3,6 +3,7 @@
 
 import helper from "./helper";
 import ProjectComponent from "./components/ProjectComponent";
+import Todo from "./todo";
 class Project {
   #pendingTasks;
   #completedTasks;
@@ -58,6 +59,36 @@ class Project {
         ? this.#completedTasks.shift()
         : this.#completedTasks.splice(taskIndex, taskIndex);
     }
+  }
+
+  toJSON() {
+    let obj = {
+      name: this.name,
+      pending: {},
+      completed: {},
+    };
+    this.#pendingTasks.forEach((task, index) => {
+      obj.pending[`task${index}`] = task.toJSON();
+    });
+    this.#completedTasks.forEach((task, index) => {
+      obj.completed[`task${index}`] = task.toJSON();
+    });
+    return JSON.stringify(obj);
+  }
+
+  static fromJSON(json) {
+    let projectOBJ = JSON.parse(json);
+    for (const key in projectOBJ.pending) {
+      if (Object.hasOwnProperty.call(projectOBJ.pending, key)) {
+        projectOBJ.pending[key] = Todo.fromJSON(projectOBJ.pending[key]);
+      }
+    }
+    for (const key in projectOBJ.completed) {
+      if (Object.hasOwnProperty.call(projectOBJ.completed, key)) {
+        projectOBJ.completed[key] = Todo.fromJSON(projectOBJ.completed[key]);
+      }
+    }
+    return projectOBJ;
   }
 }
 

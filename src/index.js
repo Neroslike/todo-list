@@ -91,9 +91,10 @@ projectModule.registerComponent(project2.component);
 
 let firstProject = document.querySelector(".projectContainer");
 firstProject.click();
-// priorities.registerComponent(TestComponent);
-// let a = new TextComponent("text", {
-//   name: "Domestic animals",
-//   contents: "Cats and dogs",
-// });
-// priorities.registerComponent(a);
+
+let storage = window.localStorage;
+let a = project.toJSON();
+console.log(a);
+console.log(Project.fromJSON(a));
+// storage.setItem("project", project.toJSON());
+// console.log(storage);

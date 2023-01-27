@@ -130,11 +130,31 @@ class Todo {
     return this.#parent !== null;
   }
 
-  #recursiveCheck(array, index = 0) {
-    if (array[index] && array[index].check === false) {
-      array[index].toggleCheck();
-      return this.#recursiveCheck(array, index + 1);
+  toJSON() {
+    let obj = {
+      title: this.title,
+      date: this.date,
+      priority: this.priority,
+      description: this.description,
+      isChecked: this.#isChecked,
+    };
+    if (!this.isSubtask()) {
+      obj.children = {};
+      this.#children.forEach((task, index) => {
+        obj.children[`subtask${index}`] = task.toJSON();
+      });
     }
+    return JSON.stringify(obj);
+  }
+
+  static fromJSON(json) {
+    let todoOBJ = JSON.parse(json);
+    for (const key in todoOBJ.children) {
+      if (Object.hasOwnProperty.call(todoOBJ.children, key)) {
+        todoOBJ.children[key] = JSON.parse(todoOBJ.children[key]);
+      }
+    }
+    return todoOBJ;
   }
 }
 export default Todo;
