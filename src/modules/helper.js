@@ -3,6 +3,7 @@ import Project from "./project";
 import ProjectComponent from "./components/ProjectComponent";
 import Neros from "./Neros";
 import Priority from "./priority";
+import { Storage } from "./storageManagement";
 
 const helper = (() => {
   // This method finds the element matching the ID on the given array and deletes it by index
@@ -67,6 +68,7 @@ const helper = (() => {
   let deleteProjectBtn = document.querySelector("#deleteProject");
   deleteProjectBtn.addEventListener("click", () => {
     Neros.deleteNerosComponent(Neros.projects, Project.selected.component);
+    Project.deleteProject(Project.selected);
   });
 
   let resetPrioBtn = document.querySelector("#resetPriorities");
