@@ -155,9 +155,6 @@ class TaskComponent extends Component {
           if (this.state.todo.children) this.checkChildren();
         }
       },
-      priorityButton: () => {
-        console.log("The priority button was pressed", this.state);
-      },
       viewButton: () => {
         let component = new viewTodoComponent("taskView", {
           todo: this.state.todo,

@@ -34,7 +34,7 @@ const modal = (() => {
   // Show modal with new todo form when the 'add new todo' button is clicked
   addTodoBtn.addEventListener("click", () => {
     let newTodo = new NewTodoComponent("newTodo", { parent: null });
-    if (Project.selected !== null) {
+    if (Project.selected) {
       show(newTodo);
     }
   });

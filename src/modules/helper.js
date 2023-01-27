@@ -75,6 +75,7 @@ const helper = (() => {
   resetPrioBtn.addEventListener("click", () => {
     Priority.resetColours();
     PriorityComponent.displayPriorities();
+    if (Project.selected) Project.selected.component.update();
   });
 
   return { deleteItem, findTask, mergeSort };

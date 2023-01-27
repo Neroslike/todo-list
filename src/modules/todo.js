@@ -113,8 +113,8 @@ class Todo {
     img.src = unchecked;
     if (this.#parent === null) {
       TodoComponent.moveToPending(element);
-      this.project.resumeTodo(this.id);
-      this.project.component.refreshTodos();
+      this.project.resumeTodo(this);
+      this.project.component.update();
     }
     Storage.saveData();
   }
@@ -128,8 +128,8 @@ class Todo {
     img.src = checked;
     if (this.#parent === null) {
       TodoComponent.moveToCompleted(element);
-      this.project.completeTodo(this.id);
-      this.project.component.refreshTodos();
+      this.project.completeTodo(this);
+      this.project.component.update();
     }
     Storage.saveData();
   }

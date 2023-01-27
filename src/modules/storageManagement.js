@@ -54,6 +54,7 @@ export const Storage = (() => {
   const loadData = () => {
     _loadPriorityData();
     _loadProjectData();
+    console.log(Project.selected);
   };
 
   const _selectLastProject = () => {

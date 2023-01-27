@@ -1,3 +1,5 @@
+import { Storage } from "./storageManagement";
+
 class Priority {
   #name;
   #number;
@@ -23,6 +25,7 @@ class Priority {
     Priority.#prioritiesArray.forEach((priority, index) => {
       priority.color = Priority.#defaultColours[index];
     });
+    Storage.savePriorityData();
   }
 
   static get priorities() {

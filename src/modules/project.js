@@ -44,14 +44,16 @@ class Project {
     this.#completedTasks.push(item);
   }
 
-  completeTodo(id) {
-    let task = helper.deleteItem(this.#pendingTasks, id);
-    this.addCompleted(task);
+  completeTodo(todo) {
+    let foundIndex = this.#pendingTasks.indexOf(todo);
+    this.#pendingTasks.splice(foundIndex, 1);
+    this.addCompleted(todo);
   }
 
-  resumeTodo(id) {
-    let task = helper.deleteItem(this.#completedTasks, id);
-    this.addPending(task);
+  resumeTodo(todo) {
+    let foundIndex = this.#completedTasks.indexOf(todo);
+    this.#completedTasks.splice(foundIndex, 1);
+    this.addPending(todo);
   }
 
   clearCompletedTodos() {
