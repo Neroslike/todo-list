@@ -4,6 +4,7 @@ import Project from "./project";
 import TodoComponent from "./components/TodoComponent";
 import checked from "../assets/checked.svg";
 import unchecked from "../assets/unchecked.svg";
+import { Storage } from "./storageManagement";
 
 /* 1.- Be able to create and delete todo's ✔️
    2.- If a todo's is a parent, they get added to the pending tasks when created ✔️
@@ -18,7 +19,15 @@ class Todo {
   #isChecked;
   #project;
 
-  constructor(title, date, priority, description, isChecked, parent = null) {
+  constructor(
+    title,
+    date,
+    priority,
+    description,
+    isChecked,
+    firstLoad = false,
+    parent = null
+  ) {
     this.title = title;
     this.date = date;
     this.priority = priority;
@@ -29,6 +38,7 @@ class Todo {
     this.#project = Project.selected;
     this.component = null;
     this.domElement = null;
+    this.firstLoad = firstLoad;
     if (this.#parent === null) {
       this.#children = [];
       // If the todo is already checked add it to the completed tasks array
@@ -39,11 +49,29 @@ class Todo {
     } else {
       this.#children = false;
     }
+    if (!this.firstLoad && !this.isSubtask()) {
+      Storage.saveData();
+    } else {
+      this.firstLoad = false;
+    }
   }
 
-  createTodo(title, date, priority, description, isChecked) {
-    let a = new Todo(title, date, priority, description, isChecked, this);
+  createTodo(title, date, priority, description, isChecked, firstLoad) {
+    let a = new Todo(
+      title,
+      date,
+      priority,
+      description,
+      isChecked,
+      firstLoad,
+      this
+    );
     this.#children.push(a);
+    if (!firstLoad) {
+      Storage.saveData();
+    } else {
+      a.firstLoad = false;
+    }
     return a;
   }
 
@@ -52,6 +80,7 @@ class Todo {
     this.date = date;
     this.priority = priority;
     this.description = description;
+    Storage.saveData();
   }
 
   get id() {
@@ -87,6 +116,7 @@ class Todo {
       this.project.resumeTodo(this.id);
       this.project.component.refreshTodos();
     }
+    Storage.saveData();
   }
 
   checkTodo() {
@@ -101,6 +131,7 @@ class Todo {
       this.project.completeTodo(this.id);
       this.project.component.refreshTodos();
     }
+    Storage.saveData();
   }
 
   deleteTodo(task) {
@@ -109,6 +140,7 @@ class Todo {
     } else {
       this.project.deleteTodo(task);
     }
+    Storage.saveData();
   }
 
   delete(task) {
@@ -155,6 +187,30 @@ class Todo {
       }
     }
     return todoOBJ;
+  }
+
+  static loadTodo(obj) {
+    let todo = new Todo(
+      obj.title,
+      obj.date,
+      obj.priority,
+      obj.description,
+      obj.isChecked,
+      true
+    );
+    for (const key in obj.children) {
+      if (Object.hasOwnProperty.call(obj.children, key)) {
+        todo.createTodo(
+          obj.children[key].title,
+          obj.children[key].date,
+          obj.children[key].priority,
+          obj.children[key].description,
+          obj.children[key].isChecked,
+          true
+        );
+      }
+    }
+    return todo;
   }
 }
 export default Todo;

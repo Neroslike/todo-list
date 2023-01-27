@@ -28,7 +28,8 @@ export class NewProjectComponent extends Component {
     let element = super.DOMelement();
     let button = element.querySelector("button");
     let form = element.querySelector("form");
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
       this.createProject(form);
     });
     return element;
