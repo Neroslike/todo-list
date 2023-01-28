@@ -4,6 +4,7 @@ import ProjectComponent from "./components/ProjectComponent";
 import Neros from "./Neros";
 import Priority from "./priority";
 import { PriorityComponent } from "./components/PriorityComponent";
+import { parseISO } from "date-fns";
 
 const helper = (() => {
   // This method finds the element matching the ID on the given array and deletes it by index
@@ -55,20 +56,24 @@ const helper = (() => {
   // I don't think it's worth creating a new module just for this.
   let clear = document.querySelector("#clearCompleted");
   clear.addEventListener("click", () => {
-    let project = Project.selected;
-    let projectComponent = project.component;
+    if (Project.selected) {
+      let project = Project.selected;
+      let projectComponent = project.component;
 
-    ProjectComponent.resetView();
-    project.clearCompletedTodos();
-    projectComponent.displayTodos("completed", project.completed);
-    projectComponent.displayTodos("pending", project.pending);
+      ProjectComponent.resetView();
+      project.clearCompletedTodos();
+      projectComponent.displayTodos("completed", project.completed);
+      projectComponent.displayTodos("pending", project.pending);
+    }
   });
 
   // Add event listener to 'Delete this project' button
   let deleteProjectBtn = document.querySelector("#deleteProject");
   deleteProjectBtn.addEventListener("click", () => {
-    Neros.deleteNerosComponent(Neros.projects, Project.selected.component);
-    Project.deleteProject(Project.selected);
+    if (Project.selected) {
+      Neros.deleteNerosComponent(Neros.projects, Project.selected.component);
+      Project.deleteProject(Project.selected);
+    }
   });
 
   let resetPrioBtn = document.querySelector("#resetPriorities");
@@ -78,7 +83,12 @@ const helper = (() => {
     if (Project.selected) Project.selected.component.update();
   });
 
-  return { deleteItem, findTask, mergeSort };
+  const parseStringDate = (dateString) => {
+    let dateStr = dateString.split("-").join("/");
+    return dateStr;
+  };
+
+  return { deleteItem, findTask, mergeSort, parseStringDate };
 })();
 
 export default helper;

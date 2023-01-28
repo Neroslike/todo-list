@@ -9,6 +9,9 @@ import edit from "../../assets/edit.svg";
 import checked from "../../assets/checked.svg";
 import unchecked from "../../assets/unchecked.svg";
 import { DeleteComponent } from "./DeleteComponent";
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
+import helper from "../helper";
+import { formatDistanceToNow } from "date-fns/esm";
 
 // 1.- If a big todo is checked, its children are also checked ✔️
 // 2.- If all the subtodos are checked, the parent is also checked ✔️
@@ -65,7 +68,10 @@ class TaskComponent extends Component {
           <p>${state.todo.title}</p>
         </div>
         <div class="taskTime">
-          <p>5 days left</p>
+          <p>${formatDistanceToNow(
+            new Date(helper.parseStringDate(state.todo.date)),
+            { addSuffix: true }
+          )}</p>
         </div>
       </div>
     </div>

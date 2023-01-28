@@ -18,6 +18,7 @@ const modal = (() => {
     let modal = new Neros("modalContainer");
     modal.registerComponent(component);
     modalElement.classList.remove("hidden");
+    modalElement.focus();
   };
 
   const resetModal = () => {
@@ -27,6 +28,12 @@ const modal = (() => {
   // Hide modal when the user clicks outside
   modalElement.addEventListener("mousedown", (e) => {
     if (e.target === modalElement) {
+      hide();
+    }
+  });
+
+  modalElement.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27) {
       hide();
     }
   });

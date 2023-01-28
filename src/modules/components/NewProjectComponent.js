@@ -19,16 +19,15 @@ export class NewProjectComponent extends Component {
         <label for='Title'>Project Title</label>
         <input type='text' name='Title' id='Title'>
         </div>
-        <button class='createButton' type='button'>Create</button>
+        <button class='createButton' type='submit'>Create</button>
       </form>
     </div>
   `;
 
   DOMelement() {
     let element = super.DOMelement();
-    let button = element.querySelector("button");
     let form = element.querySelector("form");
-    button.addEventListener("click", (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       this.createProject(form);
     });

@@ -26,7 +26,10 @@ export class PriorityComponent extends Component {
     picker.addEventListener("change", (e) => {
       this.state.priority.color = e.target.value;
       Storage.savePriorityData();
-      Project.selected.component.update();
+      PriorityComponent.displayPriorities();
+      if (Project.selected) {
+        Project.selected.component.update();
+      }
     });
     return element;
   }

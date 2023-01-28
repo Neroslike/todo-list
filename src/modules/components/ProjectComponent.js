@@ -69,7 +69,7 @@ class ProjectComponent extends Component {
       Project.selected = this.state.project;
       // Reset the board before displaying this project todos
       ProjectComponent.resetView();
-      this.refreshTodos();
+      this.update();
     });
   }
 
