@@ -31,6 +31,7 @@ export class PriorityComponent extends Component {
     return element;
   }
 
+  //This method updates and displays the priorities in the sidebar
   static displayPriorities() {
     let priorityNeros = new Neros("priorities");
     Priority.priorities.forEach((priority) => {

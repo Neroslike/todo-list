@@ -63,14 +63,6 @@ class ProjectComponent extends Component {
     this.displayTodos("pending", this.state.project.pending);
   }
 
-  refreshTodos() {
-    let pendingArray = this.state.project.pending;
-    let completedArray = this.state.project.completed;
-    if (pendingArray.length > 0) this.displayTodos("pending", pendingArray);
-    if (completedArray.length > 0)
-      this.displayTodos("completed", completedArray);
-  }
-
   DOMelement() {
     return super.DOMelement("click", (e) => {
       this.handleID(e.currentTarget);
