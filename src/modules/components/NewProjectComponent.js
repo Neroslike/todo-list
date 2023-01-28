@@ -17,7 +17,7 @@ export class NewProjectComponent extends Component {
       <form class='newForm'>
         <div class='field TitleField'>
         <label for='Title'>Project Title</label>
-        <input type='text' name='Title' id='Title'>
+        <input type='text' name='Title' id='Title' required>
         </div>
         <button class='createButton' type='submit'>Create</button>
       </form>

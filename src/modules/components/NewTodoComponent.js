@@ -3,6 +3,7 @@ import Todo from "../todo";
 import Project from "../project";
 import Neros from "../Neros";
 import modal from "../modal";
+import { format } from "date-fns";
 
 export class NewTodoComponent extends Component {
   template = (state) =>
@@ -14,13 +15,13 @@ export class NewTodoComponent extends Component {
           <label for='Title'>Title</label>
           <input type='text' name='Title' id='Title' value="${
             state.todo ? state.todo.title : ""
-          }">
+          }" required>
         </div>
         <div class='field DuedateField'>
           <label for='Due date'>Due date</label>
           <input type='date' name='Duedate' id='Due date' value="${
-            state.todo ? state.todo.date : ""
-          }">
+            state.todo ? state.todo.date : format(new Date(), "yyyy-MM-dd")
+          }" required>
         </div>
         <div class='field PriorityField'>
           <label for='Priority'>Priority</label>
@@ -77,7 +78,10 @@ export class NewTodoComponent extends Component {
 
   createTodo(form) {
     let title = form.Title.value;
-    let date = form.Duedate.value;
+    let date =
+      form.Duedate.value === ""
+        ? format(new Date(Date.now()), "yyyy-MM-dd")
+        : form.Duedate.value;
     let priority = form.Priority.selectedIndex + 1;
     let description = form.Description.value;
 

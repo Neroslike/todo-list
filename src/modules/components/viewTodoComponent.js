@@ -3,7 +3,11 @@ import Component from "../Component";
 import modal from "../modal";
 import TaskComponent from "./TaskComponent";
 import helper from "../helper";
-import { formatDistanceToNow } from "date-fns/esm";
+import {
+  formatDistanceToNow,
+  formatDistanceToNowStrict,
+  isToday,
+} from "date-fns/esm";
 
 export class viewTodoComponent extends Component {
   template = (state) =>
@@ -23,10 +27,14 @@ export class viewTodoComponent extends Component {
                 new Date(helper.parseStringDate(state.todo.date)),
                 "P"
               )}</p>
-              <p class='timeLeftView'>(${formatDistanceToNow(
-                new Date(helper.parseStringDate(state.todo.date)),
-                { addSuffix: true }
-              )})</p>
+              <p class='timeLeftView'>(${
+                isToday(new Date(helper.parseStringDate(state.todo.date)))
+                  ? "Today"
+                  : formatDistanceToNowStrict(
+                      new Date(helper.parseStringDate(state.todo.date)),
+                      { addSuffix: true }
+                    )
+              })</p>
             </div>
           </div>
           <div class='priorityViewContainer'>
