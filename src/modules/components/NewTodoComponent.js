@@ -38,7 +38,7 @@ export class NewTodoComponent extends Component {
             state.todo ? state.todo.description : ""
           }">
         </div>
-        <button class='createButton' type='button'>${
+        <button class='createButton' type='submit'>${
           this.state.todo ? "Edit" : "Create"
         }</button>
       </form>
@@ -47,17 +47,18 @@ export class NewTodoComponent extends Component {
 
   DOMelement() {
     let element = super.DOMelement();
-    let button = element.querySelector("button");
     let form = element.querySelector("form");
     // If the todo already exists (edit mode) make the button edit the todo, else just create a new task
     if (this.state.todo) {
       let select = element.querySelector(`#Priority`);
       select.selectedIndex = this.state.todo.priority - 1;
-      button.addEventListener("click", () => {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
         this.editTodo(form);
       });
     } else {
-      button.addEventListener("click", () => {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
         this.createTodo(form);
       });
     }

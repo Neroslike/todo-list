@@ -55,20 +55,24 @@ const helper = (() => {
   // I don't think it's worth creating a new module just for this.
   let clear = document.querySelector("#clearCompleted");
   clear.addEventListener("click", () => {
-    let project = Project.selected;
-    let projectComponent = project.component;
+    if (Project.selected) {
+      let project = Project.selected;
+      let projectComponent = project.component;
 
-    ProjectComponent.resetView();
-    project.clearCompletedTodos();
-    projectComponent.displayTodos("completed", project.completed);
-    projectComponent.displayTodos("pending", project.pending);
+      ProjectComponent.resetView();
+      project.clearCompletedTodos();
+      projectComponent.displayTodos("completed", project.completed);
+      projectComponent.displayTodos("pending", project.pending);
+    }
   });
 
   // Add event listener to 'Delete this project' button
   let deleteProjectBtn = document.querySelector("#deleteProject");
   deleteProjectBtn.addEventListener("click", () => {
-    Neros.deleteNerosComponent(Neros.projects, Project.selected.component);
-    Project.deleteProject(Project.selected);
+    if (Project.selected) {
+      Neros.deleteNerosComponent(Neros.projects, Project.selected.component);
+      Project.deleteProject(Project.selected);
+    }
   });
 
   let resetPrioBtn = document.querySelector("#resetPriorities");
