@@ -1,6 +1,9 @@
+import { format } from "date-fns";
 import Component from "../Component";
 import modal from "../modal";
 import TaskComponent from "./TaskComponent";
+import helper from "../helper";
+import { formatDistanceToNow } from "date-fns/esm";
 
 export class viewTodoComponent extends Component {
   template = (state) =>
@@ -16,8 +19,14 @@ export class viewTodoComponent extends Component {
           <div class='dateViewContainer'>
             <h3>Due date</h3>
             <div class='dateStringContainer'>
-              <p class='dateView'>01/01/2023</p>
-              <p class='timeLeftView'>(4 days left)</p>
+              <p class='dateView'>${format(
+                new Date(helper.parseStringDate(state.todo.date)),
+                "P"
+              )}</p>
+              <p class='timeLeftView'>(${formatDistanceToNow(
+                new Date(helper.parseStringDate(state.todo.date)),
+                { addSuffix: true }
+              )})</p>
             </div>
           </div>
           <div class='priorityViewContainer'>

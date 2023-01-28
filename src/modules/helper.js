@@ -4,6 +4,7 @@ import ProjectComponent from "./components/ProjectComponent";
 import Neros from "./Neros";
 import Priority from "./priority";
 import { PriorityComponent } from "./components/PriorityComponent";
+import { parseISO } from "date-fns";
 
 const helper = (() => {
   // This method finds the element matching the ID on the given array and deletes it by index
@@ -82,7 +83,12 @@ const helper = (() => {
     if (Project.selected) Project.selected.component.update();
   });
 
-  return { deleteItem, findTask, mergeSort };
+  const parseStringDate = (dateString) => {
+    let dateStr = dateString.split("-").join("/");
+    return dateStr;
+  };
+
+  return { deleteItem, findTask, mergeSort, parseStringDate };
 })();
 
 export default helper;
