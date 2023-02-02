@@ -29,7 +29,7 @@ class TaskComponent extends Component {
     super(name, state);
     // Create the priority color html and color, I should put this into its own class
     this.colorHTML = (priority) =>
-      `<div class="priorityColor" style="background-color: ${priority.color}"></div>`;
+      `<div class="taskColor" style="background-color: ${priority.color}"></div>`;
     this.colorMini = new MiniContainerComponent("priority", {
       html: this.colorHTML(Priority.priority(state.todo.priority)),
       typeClass: "priorityButtonMini",
@@ -67,6 +67,8 @@ class TaskComponent extends Component {
   template = (state) =>
     `
     <div class="${state.classes.join(" ")}">
+      <div class='taskButtons taskButtonsLeft'>
+      </div>
       <div class="taskDataContainer">
         <div class="taskTitle">
           <p>${state.todo.title}</p>
@@ -81,6 +83,8 @@ class TaskComponent extends Component {
                 )
           }</p>
         </div>
+      </div>
+      <div class='taskButtons taskButtonsRight'>
       </div>
     </div>
   `;
@@ -104,11 +108,12 @@ class TaskComponent extends Component {
       "click",
       this.eventHandler().deleteButton
     );
+    let miniButtons = element.querySelectorAll(".taskButtons");
 
-    element.prepend(priority);
-    element.prepend(check);
-    element.append(edit);
-    element.append(deleteBtn);
+    miniButtons[0].append(check);
+    miniButtons[0].append(priority);
+    miniButtons[1].append(edit);
+    miniButtons[1].append(deleteBtn);
     this.state.todo.domElement = element;
     return element;
   }

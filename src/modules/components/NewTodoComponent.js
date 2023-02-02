@@ -9,7 +9,9 @@ export class NewTodoComponent extends Component {
   template = (state) =>
     `
     <div class='newContainer'>
-      <h1 class='newTitle'>Create todo</h1>
+      <div class='headerContainer'>
+        <h1 class='newTitle'>${state.todo ? "Edit Todo" : "New Todo"}</h1>
+      </div>
       <form class='newForm'>
         <div class='field TitleField'>
           <label for='Title'>Title</label>
@@ -35,9 +37,7 @@ export class NewTodoComponent extends Component {
         </div>
         <div class='field DescriptionField'>
           <label for='Description'>Description</label>
-          <input type='text' name='Description' id='Description' value="${
-            state.todo ? state.todo.description : ""
-          }">
+          <textarea name='Description' id='Description' rows='5'></textarea>
         </div>
         <button class='createButton' type='submit'>${
           this.state.todo ? "Edit" : "Create"
@@ -63,6 +63,8 @@ export class NewTodoComponent extends Component {
         this.createTodo(form);
       });
     }
+    let description = element.querySelector("textarea");
+    description.value = this.state.todo ? this.state.todo.description : "";
     return element;
   }
 

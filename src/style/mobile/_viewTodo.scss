@@ -1,0 +1,45 @@
+@media (max-width: 800px) {
+  $responsive-p-font-size: 1rem;
+  $navbar-height: clamp(2.5rem, 2.5rem + 1.5vw, 4.5rem);
+  .infoContainer {
+    min-width: 100%;
+
+    .headerContainer {
+      padding-top: calc(2rem + 1vw);
+      .closeButton {
+        position: fixed;
+        justify-self: flex-start;
+        align-self: flex-start;
+        top: calc(0.5rem + 0.5vw);
+        z-index: 100;
+      }
+    }
+
+    p {
+      font-size: $responsive-p-font-size;
+    }
+
+    .viewDescription {
+      padding: 0 clamp(1rem, 1rem + 0.5vw, 2rem);
+    }
+
+    .todoDataContainer {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .viewTitle {
+    word-wrap: break-word;
+    word-break: break-word;
+    padding: 0 clamp(2rem, 2rem + 0.5vw, 4rem);
+  }
+
+  .viewNavbar {
+    height: $navbar-height;
+    width: 100%;
+    position: fixed;
+    z-index: 99;
+    background: #343a40;
+    overflow-x: hidden;
+  }
+}

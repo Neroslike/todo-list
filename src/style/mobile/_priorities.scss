@@ -1,0 +1,30 @@
+@media (max-width: 800px) {
+  $responsive-font-size: clamp(1rem, 0.8rem + 1vw, 3rem);
+  $responsive-padding: clamp(0.6rem, 0.6rem + 1vw, 3rem);
+  $responsive-button-size: clamp(1rem, 1rem + 1vw, 3rem);
+  $responsive-margin: clamp(1rem, 1rem + 1vw, 1.5rem);
+
+  .sidebar {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: #343a40;
+
+    .sidebarButtons {
+      gap: clamp(0.5rem, 0.5rem + 0.5vw, 1rem);
+    }
+  }
+
+  .priority {
+    .priorityName {
+      font-size: $responsive-font-size;
+    }
+
+    .priorityColorContainer {
+      .priorityColor {
+        height: $responsive-button-size;
+        width: $responsive-button-size;
+      }
+    }
+  }
+}

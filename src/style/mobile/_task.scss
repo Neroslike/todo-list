@@ -1,0 +1,62 @@
+@media (max-width: 300px) {
+  .taskTime {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  $responsive-button-size: clamp(1rem, 1rem + 1vw, 3rem);
+  $responsive-padding: clamp(0.6rem, 0.6rem + 1vw, 3rem);
+  $responsive-font-size: clamp(1rem, 0.8rem + 1vw, 3rem);
+  $responsive-subButton-size: clamp(0.8rem, 0.8rem + 1vw, 2.5rem);
+  $responsive-subPadding: clamp(0.4rem, 0.4rem + 1vw, 2.5rem);
+  $responsive-subFont-size: clamp(0.8rem, 0.6rem + 1vw, 2.5rem);
+
+  .taskMiniContainer {
+    padding: $responsive-padding;
+  }
+
+  .taskColor,
+  .taskButton {
+    height: $responsive-button-size;
+    width: $responsive-button-size;
+  }
+
+  .taskTitle {
+    p {
+      font-size: $responsive-font-size;
+    }
+  }
+
+  .taskTime {
+    p {
+      font-size: clamp(0.4rem, 0.4em + 1vw, 1.5rem);
+    }
+  }
+  .addSubtask {
+    font-size: $responsive-font-size;
+  }
+
+  .subtask {
+    .taskMiniContainer {
+      padding: $responsive-subPadding;
+
+      .taskButton,
+      .taskColor {
+        height: $responsive-subButton-size;
+        width: $responsive-subButton-size;
+      }
+    }
+    .taskTitle {
+      p {
+        font-size: $responsive-subFont-size;
+      }
+    }
+
+    .taskTime {
+      p {
+        font-size: clamp(0.4rem, 0.4rem + 1vw, 1.5rem);
+      }
+    }
+  }
+}

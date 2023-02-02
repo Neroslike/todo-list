@@ -9,7 +9,11 @@ export class PriorityComponent extends Component {
     `
     <div class="priority">
       <div class="priorityColorContainer">
-        <input type="color" class='priorityColor picker' value='${state.priority.color}'/>
+        ${
+          state.picker
+            ? `<input type="color" class='priorityColor picker' value='${state.priority.color}'/>`
+            : `<div class='taskColor' style='background-color: ${state.priority.color}'></div>`
+        }
       </div>
       <p class="priorityName">${state.priority.name}</p>
     </div>
@@ -18,19 +22,22 @@ export class PriorityComponent extends Component {
   DOMelement() {
     let element = super.DOMelement();
     let picker = element.querySelector(".picker");
-    element.addEventListener("click", (e) => {
-      picker.click();
-    });
+    if (picker) {
+      element.addEventListener("click", (e) => {
+        picker.click();
+      });
 
-    //Change priority color when the color picker changes
-    picker.addEventListener("change", (e) => {
-      this.state.priority.color = e.target.value;
-      Storage.savePriorityData();
-      PriorityComponent.displayPriorities();
-      if (Project.selected) {
-        Project.selected.component.update();
-      }
-    });
+      //Change priority color when the color picker changes
+      picker.addEventListener("change", (e) => {
+        this.state.priority.color = e.target.value;
+        Storage.savePriorityData();
+        PriorityComponent.displayPriorities();
+        if (Project.selected) {
+          Project.selected.component.update();
+        }
+      });
+    }
+
     return element;
   }
 
@@ -40,6 +47,7 @@ export class PriorityComponent extends Component {
     Priority.priorities.forEach((priority) => {
       let component = new PriorityComponent(priority.name, {
         priority: priority,
+        picker: true,
       });
       priorityNeros.registerComponent(component);
     });

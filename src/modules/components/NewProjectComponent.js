@@ -13,7 +13,9 @@ export class NewProjectComponent extends Component {
   template = () =>
     `
     <div class='newProjectContainer'>
-      <h1>Create new Project</h1>
+      <div class='headerContainer'>
+        <h1>New Project</h1>
+      </div>
       <form class='newForm'>
         <div class='field TitleField'>
         <label for='Title'>Project Title</label>

@@ -1,23 +1,30 @@
 import { format } from "date-fns";
 import Component from "../Component";
-import modal from "../modal";
 import TaskComponent from "./TaskComponent";
 import helper from "../helper";
+import { PriorityComponent } from "./PriorityComponent";
 import {
   formatDistanceToNow,
   formatDistanceToNowStrict,
   isToday,
 } from "date-fns/esm";
+import Priority from "../priority";
 
 export class viewTodoComponent extends Component {
   template = (state) =>
     `
     <div class='infoContainer'>
+      <div class='viewNavbar'></div>
       <div class='mainTaskContainer'>
-        <h1 class='viewTitle'>${state.todo.title}</h1>
+        <div class='headerContainer'>
+          <h1 class='viewTitle'>${state.todo.title}</h1>
+        </div>
         <hr>
         <div class='descriptionViewContainer'>
-          <p class='viewDescription'>${state.todo.description}</p>
+          <p class='viewDescription'>${state.todo.description.replace(
+            /\n/g,
+            "<br>"
+          )}</p>
         </div>
         <div class='todoDataContainer'>
           <div class='dateViewContainer'>
@@ -75,8 +82,17 @@ export class viewTodoComponent extends Component {
       // Remove the check minicontainer so users wont be able to check the todo from the modal
       subtaskContainer.append(parentDOM);
     }
+    this.createPriority(element, this.state.todo.priority);
     return element;
   }
 
-  linkedTasks() {}
+  createPriority(element, prioNumber) {
+    let priorityContainer = element.querySelector(".priorityViewContainer");
+    let priority = Priority.priorities[prioNumber - 1];
+    let priorityComponent = new PriorityComponent("todoPriority", {
+      priority: priority,
+      picker: false,
+    }).DOMelement();
+    priorityContainer.append(priorityComponent);
+  }
 }

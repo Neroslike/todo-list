@@ -1,4 +1,4 @@
-@import "./index";
+@import "./index", "./mobile/index";
 
 html {
   font-size: 16px;
@@ -11,6 +11,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 100%;
 }
 
 h1 {
@@ -60,4 +61,22 @@ button {
 .taskTitle,
 .priorityName {
   user-select: none;
+}
+
+@media (min-width: 800px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #212529;
+    border: 1px solid rgb(38, 36, 36);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #e7e7e7c5;
+  }
 }

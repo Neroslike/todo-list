@@ -1,9 +1,10 @@
 $responsive-text-size: clamp(8px, 1vw, 64px);
-$responsive-button-size: clamp(14px, calc(0.5rem + 0.7vw), 64px);
+$responsive-button-size: clamp(0.5rem, 0.5rem + 1vw, 1.3rem);
 $responsive-prio-size: clamp(14px, calc(0.5rem + 0.4vw), 64px);
-
+$responsive-padding: clamp(1.4rem, 1rem + 1vw, 2rem);
+$responsive-margin: clamp(1rem, 1rem + 1vw, 1.5rem);
 .priorityName {
-  padding-left: 10px;
+  padding-left: clamp(0.7rem, 0.7rem + 1vw, 1rem);
   font-size: $responsive-text-size;
   margin: 0;
   font-weight: 300;
@@ -22,8 +23,6 @@ $responsive-prio-size: clamp(14px, calc(0.5rem + 0.4vw), 64px);
 
 .priorityColor {
   border-radius: 50%;
-  height: $responsive-button-size;
-  width: $responsive-button-size;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.6);
 }
 
@@ -54,24 +53,25 @@ input[type="color"]::-webkit-color-swatch {
   cursor: pointer;
 }
 
+#priorities,
+#projects {
+  margin-bottom: $responsive-margin;
+}
+
 #priorities {
-  width: clamp(100px, calc(30% + 4vw), 600px);
   display: flex;
   flex-direction: column;
   gap: clamp(6px, 0.3vw, 12px);
-  margin-bottom: clamp(10px, 0.7vw, 16px);
+
+  .priority {
+    padding-right: $responsive-padding;
+  }
 }
 
 .priorityColorContainer {
   .priorityColor {
-    height: $responsive-prio-size;
-    width: $responsive-prio-size;
-  }
-}
-
-@media (max-width: 800px) {
-  .sidebar {
-    display: none;
+    height: $responsive-button-size;
+    width: $responsive-button-size;
   }
 }
 
@@ -79,4 +79,8 @@ input[type="color"]::-webkit-color-swatch {
   display: flex;
   flex-direction: column;
   gap: 0.6vw;
+}
+
+.hidePriorities {
+  display: none;
 }
