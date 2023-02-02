@@ -48,6 +48,7 @@ const helper = (() => {
         } else if (array1[0].priority < array2[0].priority) {
           sortedArray.push(array2.shift());
         } else {
+          // If the todos have the same priority, push the earliest todo to the sorted array
           compareDesc(parseISO(array1[0].date), parseISO(array2[0].date)) === 1
             ? sortedArray.push(array1.shift())
             : sortedArray.push(array2.shift());
