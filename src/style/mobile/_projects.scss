@@ -1,0 +1,11 @@
+@media (max-width: 800px) {
+  #projects {
+    gap: clamp(0.3rem, 0.3rem + 0.5vw, 0.8rem);
+  }
+
+  .projectContainer {
+    h3 {
+      margin-left: clamp(0.5rem, 0.5rem + 0.5vw, 1rem);
+    }
+  }
+}

@@ -1,4 +1,6 @@
 .field {
+  $responsive-select: clamp(0.3rem, 0.3rem + 0.4vw, 0.8rem);
+
   display: flex;
   flex-direction: column;
   gap: 0.4vw;
@@ -62,7 +64,7 @@
     appearance: none;
     cursor: pointer;
     background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
-        no-repeat right 0.8em center / 1.4em,
+        no-repeat right 0.8rem center / 1.4em,
       #212529;
     /* Remove focus outline */
     &:focus {
@@ -77,8 +79,6 @@
 
 .newTitle {
   padding: 0;
-  margin: 0;
-  padding: calc(1vw + 6px);
 }
 
 .createButton {

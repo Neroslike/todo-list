@@ -4,6 +4,9 @@
   align-items: center;
   gap: 0.5vw;
   width: 100%;
+  max-height: calc(2rem + 10vh);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .projectContainer {

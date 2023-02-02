@@ -2,6 +2,7 @@ import Neros from "./Neros";
 import { NewTodoComponent } from "./components/NewTodoComponent";
 import { NewProjectComponent } from "./components/NewProjectComponent";
 import Project from "./project";
+import close from "../assets/close.svg";
 
 const modal = (() => {
   let modalElement = document.querySelector("#modal");
@@ -17,12 +18,26 @@ const modal = (() => {
   const show = (component) => {
     let modal = new Neros("modalContainer");
     modal.registerComponent(component);
+    let closeBtn = _createCloseButton();
+    let headerDiv = modalElement.querySelector(".headerContainer");
+    if (headerDiv) headerDiv.append(closeBtn);
     modalElement.classList.remove("hidden");
     modalElement.focus();
   };
 
+  const _createCloseButton = () => {
+    let closeBtn = document.createElement("i");
+    closeBtn.classList.add("closeButton");
+    closeBtn.classList.add("fa-xmark");
+    closeBtn.classList.add("fa-solid");
+    closeBtn.addEventListener("click", () => {
+      hide();
+    });
+    return closeBtn;
+  };
+
   const resetModal = () => {
-    modalContainer.innerHTML = "";
+    modalElement.innerHTML = "<div id='modalContainer'></div>";
   };
 
   // Hide modal when the user clicks outside
@@ -54,8 +69,19 @@ const modal = (() => {
     show(newProject);
   });
 
-  // Add view event listener to tasks
+  // Add event listener to burger menu button to show the sidebar in mobile version
+  let burger = document.querySelector(".burgerMenu");
+  burger.addEventListener("click", () => {
+    let sidebar = document.querySelector(".sidebar");
+    sidebar.classList.remove("hideSidebar");
+  });
 
+  // Add event listener to back menu button to hide the sidebar in mobile version
+  let goBack = document.querySelector(".goBack");
+  goBack.addEventListener("click", () => {
+    let sidebar = document.querySelector(".sidebar");
+    sidebar.classList.add("hideSidebar");
+  });
   return {
     hide,
     show,
