@@ -9,6 +9,7 @@
     height: 100vh;
     width: 100vw;
     background: #343a40;
+    overflow-x: auto;
 
     .sidebarButtons {
       gap: clamp(0.5rem, 0.5rem + 0.5vw, 1rem);
