@@ -20,40 +20,56 @@
       </div>
     </div>
     <div class="container">
-      <div class="sidebar">
-        <h1>Priorities</h1>
+      <div class="sidebar hideSidebar">
+        <div class="headerContainer">
+          <i class="fa-solid fa-arrow-left goBack"></i>
+          <h1 class="dashboardHeader">Priorities</h1>
+        </div>
         <div id="priorities"> </div>
         <div class="sidebarButtons">
           <button id="resetPriorities"
             ><i class="fa-solid fa-rotate-left"></i>Reset colors</button
           >
           <button id="addBigTodo"
-            ><i class="fa-solid fa-plus"></i>Add new todo</button
+            ><i class="fa-solid fa-plus"></i>New todo</button
           >
           <button id="clearCompleted" class="deleteButton"
             ><i class="fa-solid fa-ban"></i>Clear completed</button
           >
         </div>
-        <h1>Projects</h1>
+        <h1 class="dashboardHeader">Projects</h1>
         <div id="projects"> </div>
-        <div class="sidebarButtons">
+        <div class="sidebarButtons" id="projectButtons">
           <button id="addProject"
-            ><i class="fa-solid fa-list-check"></i>Add new Project</button
+            ><i class="fa-solid fa-list-check"></i>New Project</button
           >
           <button id="deleteProject"
-            ><i class="fa-solid fa-trash"></i>Delete this Project</button
+            ><i class="fa-solid fa-trash"></i>Delete Project</button
+          >
+        </div>
+        <div class="github">
+          <h2
+            ><i class="fa-brands fa-github"></i>
+            <a href="https://github.com/Neroslike/" target="_blank"
+              >Albert Vilera</a
+            ></h2
           >
         </div>
       </div>
       <div class="separator"></div>
       <div class="mainContent">
         <div class="pending">
-          <h1>Pending Tasks</h1>
+          <div class="headerContainer">
+            <i class="fa-solid fa-bars burgerMenu"></i>
+            <h1 class="dashboardHeader">Pending Tasks</h1>
+          </div>
           <div id="pendingTodos" class="TodosContainer"> </div>
         </div>
         <div class="separator"></div>
         <div class="completed">
-          <h1>Completed Tasks</h1>
+          <div class="headerContainer">
+            <h1 class="dashboardHeader">Completed Tasks</h1>
+          </div>
           <div id="completedTodos" class="TodosContainer"> </div>
         </div>
       </div>
