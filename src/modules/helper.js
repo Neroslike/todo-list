@@ -5,6 +5,7 @@ import Neros from "./Neros";
 import Priority from "./priority";
 import { PriorityComponent } from "./components/PriorityComponent";
 import { parseISO } from "date-fns";
+import { compareDesc } from "date-fns/esm";
 
 const helper = (() => {
   // This method finds the element matching the ID on the given array and deletes it by index
@@ -44,8 +45,13 @@ const helper = (() => {
         }
         if (array1[0].priority < array2[0].priority) {
           sortedArray.push(array1.shift());
-        } else {
+        } else if (array1[0].priority < array2[0].priority) {
           sortedArray.push(array2.shift());
+        } else {
+          // If the todos have the same priority, push the earliest todo to the sorted array
+          compareDesc(parseISO(array1[0].date), parseISO(array2[0].date)) === 1
+            ? sortedArray.push(array1.shift())
+            : sortedArray.push(array2.shift());
         }
       }
     }

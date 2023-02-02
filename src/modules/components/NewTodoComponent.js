@@ -4,6 +4,7 @@ import Project from "../project";
 import Neros from "../Neros";
 import modal from "../modal";
 import { format } from "date-fns";
+import { da } from "date-fns/locale";
 
 export class NewTodoComponent extends Component {
   template = (state) =>
@@ -21,9 +22,10 @@ export class NewTodoComponent extends Component {
         </div>
         <div class='field DuedateField'>
           <label for='Due date'>Due date</label>
-          <input type='date' name='Duedate' id='Due date' value="${
-            state.todo ? state.todo.date : format(new Date(), "yyyy-MM-dd")
-          }" required>
+          <input type='date' name='Duedate' id='Due date' value="${this.startingDate(
+            state.todo,
+            state.parent
+          )}" required>
         </div>
         <div class='field PriorityField'>
           <label for='Priority'>Priority</label>
@@ -78,18 +80,31 @@ export class NewTodoComponent extends Component {
     modal.hide();
   }
 
+  startingDate(todo, parent) {
+    let date = "";
+    if (todo) {
+      date = todo.date;
+    } else {
+      date = parent ? parent.date : format(new Date(), "yyyy-MM-dd");
+    }
+    return date;
+  }
+
   createTodo(form) {
     let title = form.Title.value;
-    let date =
-      form.Duedate.value === ""
-        ? format(new Date(Date.now()), "yyyy-MM-dd")
-        : form.Duedate.value;
+
     let priority = form.Priority.selectedIndex + 1;
     let description = form.Description.value;
 
     if (this.state.parent) {
+      let date =
+        form.Duedate.value === "" ? this.state.parent.date : form.Duedate.value;
       this.state.parent.createTodo(title, date, priority, description, false);
     } else {
+      let date =
+        form.Duedate.value === ""
+          ? format(new Date(Date.now()), "yyyy-MM-dd")
+          : form.Duedate.value;
       new Todo(title, date, priority, description, false);
     }
     Project.selected.component.update();

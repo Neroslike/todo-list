@@ -22,7 +22,9 @@ const modal = (() => {
     let headerDiv = modalElement.querySelector(".headerContainer");
     if (headerDiv) headerDiv.append(closeBtn);
     modalElement.classList.remove("hidden");
-    modalElement.focus();
+    let input = modalElement.querySelector("input");
+    // modalElement.focus();
+    if (input) input.focus();
   };
 
   const _createCloseButton = () => {
